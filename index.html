@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIMAR Salt | Premium Sea Salt Supplier Kenya - East Africa Export</title>
+    <meta name="description" content="Kenya Popular Commodities Exporters Limited (VIMAR) - Leading premium sea salt supplier. Fine, powder, coarse & Himalayan pink salt. ISO certified. Serving Kenya, Uganda, Tanzania, Rwanda, Burundi, Ethiopia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-bg"></div>
+        <div class="loader-content">
+            <div class="logo-load"><img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR Logo"></div>
+            <div class="load-text">Loading Premium Quality...</div>
+            <div class="load-bar"><div class="load-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-wrap">
+            <a href="#" class="logo">
+                <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR">
+                <div>
+                    <div class="brand">VIMAR</div>
+                    <div class="sub">Kenya Popular Commodities</div>
+                </div>
+            </a>
+            <ul class="menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#distribution">Distribution</a></li>
+                <li><a href="#network">Network</a></li>
+                <li><a href="#quality">Quality</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#rfq" class="btn-nav">Request Quote</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button class="toggle" id="navToggle"><span></span><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#about">About</a>
+            <a href="#products">Products</a>
+            <a href="#distribution">Distribution</a>
+            <a href="#network">Network</a>
+            <a href="#quality">Quality</a>
+            <a href="#contact">Contact</a>
+            <a href="#rfq" class="btn-nav">Request Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-content reveal">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    <span>Premium Sea Salt Supply • East Africa Network • Export Ready</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="line">Purity you can</span>
+                    <span class="line accent">trust.</span>
+                    <span class="line">Supply you can</span>
+                    <span class="line accent">scale.</span>
+                </h1>
+                <p class="hero-desc">We supply consistent sea salt grades for retail, wholesale and export markets — supported by disciplined packaging workflows, documentation support and dependable regional fulfilment.</p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn-primary">
+                        <span>Explore Products</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 15l5-5-5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                    <a href="#network" class="btn-secondary">
+                        <span>View Network</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 7l6-6m0 0h-6m6 0v6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="hero-features">
+                    <div class="feature-item"><span class="check-icon">✓</span> Iodized & non-iodized options</div>
+                    <div class="feature-item"><span class="check-icon">✓</span> Retail packs, cartons & bulk</div>
+                    <div class="feature-item"><span class="check-icon">✓</span> Buyer documentation support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About - Glassmorphism with Background Image -->
+    <section id="about" class="about-section">
+        <div class="about-bg" data-speed="0.5">
+            <img src="assets/story-background.jpg" alt="Our Story Background" class="about-img">
+        </div>
+        <div class="about-overlay"></div>
+        <div class="container">
+            <div class="about-glass reveal">
+                <div class="section-label">Our Story</div>
+                <h2 class="section-title">Built for procurement confidence</h2>
+                <p class="lead-text">We produce and supply natural sea salt with a strict focus on purity, consistency, and dependable fulfilment.</p>
+                <div class="quote-block">
+                    <span class="quote-mark">"</span>
+                    <p class="quote-text">Our approach is designed for distributors, retailers, hospitality, and food-sector buyers who require repeatable product performance and professional service.</p>
+                </div>
+                <p class="body-text">We align our workflow around buyer expectations: clarity of specification, practical pack sizes, and responsive communication. Whether supplying retail shelves or supporting a distribution partner, we prioritise consistency and delivery reliability.</p>
+                <div class="pillars-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h4>Consistency</h4>
+                        <p>Controlled grading across formats for predictable results.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 5h4v7H4zm10 0h4v7h-4zM4 16h4v3H4zm10 0h4v3h-4z"/>
+                            </svg>
+                        </div>
+                        <h4>Flexibility</h4>
+                        <p>Retail packs, cartons, and order-based packaging support.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                            </svg>
+                        </div>
+                        <h4>Support</h4>
+                        <p>RFQ, samples, planning support, and buyer documentation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Salt Textures Section -->
+    <section class="textures-section">
+        <div class="container">
+            <div class="section-header center reveal">
+                <div class="section-label">Crystal Science</div>
+                <h2 class="section-title">Salt textures & grain profiles</h2>
+                <p class="section-desc">Explore the distinct crystal structures and applications of our premium salt grades</p>
+            </div>
+            <div class="textures-grid">
+                <div class="texture-item reveal">
+                    <div class="texture-visual">
+                        <img src="assets/textures/fine-texture.jpg" alt="Fine Salt Crystals">
+                        <div class="texture-overlay">
+                            <div class="texture-name">Fine Grade</div>
+                            <div class="texture-size">0.1-0.5mm</div>
+                        </div>
+                    </div>
+                    <div class="texture-details">
+                        <h3>Fine</h3>
+                        <div class="texture-meta">
+                            <span class="meta-tag">0.1-0.5mm</span>
+                            <span class="meta-tag">Table salt</span>
+                        </div>
+                        <p>Everyday cooking, table use, consistent seasoning. Perfect grain size for shakers and general culinary applications.</p>
+                    </div>
+                </div>
+                <div class="texture-item reveal">
+                    <div class="texture-visual">
+                        <img src="assets/textures/powder-texture.jpg" alt="Powder Salt">
+                        <div class="texture-overlay">
+                            <div class="texture-name">Powder Grade</div>
+                            <div class="texture-size">&lt;0.1mm</div>
+                        </div>
+                    </div>
+                    <div class="texture-details">
+                        <h3>Powder</h3>
+                        <div class="texture-meta">
+                            <span class="meta-tag">&lt;0.1mm</span>
+                            <span class="meta-tag">Ultra-fine</span>
+                        </div>
+                        <p>Baking and applications requiring rapid dispersion. Ideal for industrial mixing and even distribution.</p>
+                    </div>
+                </div>
+                <div class="texture-item reveal">
+                    <div class="texture-visual">
+                        <img src="assets/textures/coarse-texture.jpg" alt="Coarse Salt">
+                        <div class="texture-overlay">
+                            <div class="texture-name">Coarse Grade</div>
+                            <div class="texture-size">2-5mm</div>
+                        </div>
+                    </div>
+                    <div class="texture-details">
+                        <h3>Coarse</h3>
+                        <div class="texture-meta">
+                            <span class="meta-tag">2-5mm</span>
+                            <span class="meta-tag">Large grain</span>
+                        </div>
+                        <p>Brining, processing, and seasoning blends. Perfect for controlled seasoning and food processing.</p>
+                    </div>
+                </div>
+                <div class="texture-item reveal">
+                    <div class="texture-visual">
+                        <img src="assets/textures/pink-texture.jpg" alt="Pink Salt Crystals">
+                        <div class="texture-overlay">
+                            <div class="texture-name">Pink Crystals</div>
+                            <div class="texture-size">1-3mm</div>
+                        </div>
+                    </div>
+                    <div class="texture-details">
+                        <h3>Himalayan Pink</h3>
+                        <div class="texture-meta">
+                            <span class="meta-tag">1-3mm</span>
+                            <span class="meta-tag">Premium</span>
+                        </div>
+                        <p>Gourmet use and preservation; mineral-rich profile. Natural pink color from trace minerals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products with Auto-Switching Slideshows -->
+    <section id="products" class="products-section">
+        <div class="container-wide">
+            <div class="section-header center reveal">
+                <div class="section-label">Our Collection</div>
+                <h2 class="section-title">Premium salt products</h2>
+                <p class="section-desc">Processed for purity, packed for perfection</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card reveal" data-product="fine">
+                    <div class="product-slider">
+                        <div class="slider-track">
+                            <div class="slider-item active"><img src="assets/products/sea-salt-fine-iodized.jpg" alt="Fine Salt"></div>
+                            <div class="slider-item"><img src="assets/products/sea-salt-fine-500g.jpg" alt="Fine 500g"></div>
+                            <div class="slider-item"><img src="assets/products/sea-salt-fine-1kg.jpg" alt="Fine 1kg"></div>
+                        </div>
+                        <div class="product-badge">Retail • Wholesale</div>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Sea Salt Fine (Iodized)</h3>
+                        <p>Everyday cooking and table use. Fortified with iodine for consistent consumer-ready supply.</p>
+                        <div class="product-tags">
+                            <span>Fine crystals</span>
+                            <span>Iodized</span>
+                            <span>Carton-ready</span>
+                        </div>
+                        <button class="btn-details" data-product="fine">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card reveal" data-product="powder">
+                    <div class="product-slider">
+                        <div class="slider-track">
+                            <div class="slider-item active"><img src="assets/products/sea-salt-fine-powder.jpg" alt="Powder"></div>
+                            <div class="slider-item"><img src="assets/products/powder-500g.jpg" alt="Powder 500g"></div>
+                            <div class="slider-item"><img src="assets/products/powder-bulk.jpg" alt="Powder Bulk"></div>
+                        </div>
+                        <div class="product-badge">Processing</div>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Sea Salt Fine Powder</h3>
+                        <p>Ultra-fine dispersion for bakeries and manufacturing workflows requiring fast solubility.</p>
+                        <div class="product-tags">
+                            <span>Powder</span>
+                            <span>Even mixing</span>
+                            <span>Bulk supply</span>
+                        </div>
+                        <button class="btn-details" data-product="powder">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card reveal" data-product="coarse">
+                    <div class="product-slider">
+                        <div class="slider-track">
+                            <div class="slider-item active"><img src="assets/products/sea-salt-coarse.jpg" alt="Coarse"></div>
+                            <div class="slider-item"><img src="assets/products/coarse-1kg.jpg" alt="Coarse 1kg"></div>
+                            <div class="slider-item"><img src="assets/products/coarse-bulk.jpg" alt="Coarse Bulk"></div>
+                        </div>
+                        <div class="product-badge">Food Service</div>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Sea Salt Coarse</h3>
+                        <p>Preferred for brining and processing where larger granules improve control and texture.</p>
+                        <div class="product-tags">
+                            <span>Coarse granules</span>
+                            <span>Brining</span>
+                            <span>Processing</span>
+                        </div>
+                        <button class="btn-details" data-product="coarse">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card premium reveal" data-product="pink">
+                    <div class="product-slider">
+                        <div class="slider-track">
+                            <div class="slider-item active"><img src="assets/products/himalayan-pink-salt.jpg" alt="Pink"></div>
+                            <div class="slider-item"><img src="assets/products/pink-500g.jpg" alt="Pink 500g"></div>
+                            <div class="slider-item"><img src="assets/products/pink-1kg.jpg" alt="Pink 1kg"></div>
+                        </div>
+                        <div class="product-badge premium-badge">Premium</div>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Himalayan Pink Salt</h3>
+                        <p>Mineral-rich crystals for gourmet use, preservation, and premium retail positioning.</p>
+                        <div class="product-tags">
+                            <span>Crystals</span>
+                            <span>Gourmet</span>
+                            <span>Premium pack</span>
+                        </div>
+                        <button class="btn-details" data-product="pink">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img id="modalImg" src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDesc" class="modal-description"></p>
+                    <div class="modal-specifications">
+                        <div class="spec-row"><strong>Grade:</strong> <span id="specGrade"></span></div>
+                        <div class="spec-row"><strong>Grain Size:</strong> <span id="specGrain"></span></div>
+                        <div class="spec-row"><strong>Iodized:</strong> <span id="specIodized"></span></div>
+                        <div class="spec-row"><strong>Pack Sizes:</strong> <span id="specPack"></span></div>
+                        <div class="spec-row"><strong>Shelf Life:</strong> <span id="specShelf"></span></div>
+                        <div class="spec-row"><strong>Storage:</strong> <span id="specStorage"></span></div>
+                    </div>
+                    <div class="modal-uses">
+                        <h4>Recommended Uses:</h4>
+                        <ul id="modalUsesList"></ul>
+                    </div>
+                    <a href="#rfq" class="btn-quote" id="btnQuote">Request Quote for this Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distribution Network - NEW CONVERSATIONAL DESIGN -->
+    <section id="distribution" class="distribution-section">
+        <div class="dist-bg"></div>
+        <div class="container">
+            <div class="section-header center reveal">
+                <div class="section-label">Export & Distribution</div>
+                <h2 class="section-title">Regional distribution network</h2>
+            </div>
+            
+            <div class="dist-conversation reveal">
+                <div class="dist-hero">
+                    <div class="dist-hero-number">250+</div>
+                    <div class="dist-hero-text">Active Distribution Partners</div>
+                    <p class="dist-hero-desc">across East Africa</p>
+                </div>
+                
+                <div class="dist-story">
+                    <div class="story-block">
+                        <h3 class="story-title">From <span class="highlight">Nairobi HQ</span> to your destination</h3>
+                        <p class="story-text">We've built a comprehensive supply network designed for procurement teams and distributors who need dependable, scalable supply chains.</p>
+                    </div>
+                    
+                    <div class="story-stats">
+                        <div class="stat-inline">
+                            <span class="stat-number">45+</span>
+                            <span class="stat-text">Retail Distributors</span>
+                        </div>
+                        <div class="stat-inline">
+                            <span class="stat-number">120+</span>
+                            <span class="stat-text">Food Service Clients</span>
+                        </div>
+                        <div class="stat-inline">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-text">Industrial Facilities</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-block">
+                        <h3 class="story-title">Who we serve</h3>
+                        <div class="serve-grid">
+                            <div class="serve-item">
+                                <span class="serve-emoji">🏪</span>
+                                <p><strong>Retail</strong> – Supermarkets, grocery chains, convenience stores</p>
+                            </div>
+                            <div class="serve-item">
+                                <span class="serve-emoji">🍽️</span>
+                                <p><strong>Food Service</strong> – Hotels, restaurants, catering, hospitality</p>
+                            </div>
+                            <div class="serve-item">
+                                <span class="serve-emoji">🏭</span>
+                                <p><strong>Industrial</strong> – Food processing, bakeries, manufacturing</p>
+                            </div>
+                            <div class="serve-item">
+                                <span class="serve-emoji">📦</span>
+                                <p><strong>Wholesale</strong> – Regional distributors, bulk buyers</p>
+                            </div>
+                            <div class="serve-item">
+                                <span class="serve-emoji">🌍</span>
+                                <p><strong>Export</strong> – Uganda, Tanzania, Rwanda, Burundi, Ethiopia</p>
+                            </div>
+                            <div class="serve-item">
+                                <span class="serve-emoji">🚚</span>
+                                <p><strong>Logistics</strong> – Transport, warehousing, last-mile delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-block">
+                        <h3 class="story-title">Our commitment</h3>
+                        <div class="commitment-items">
+                            <div class="commit-item">
+                                <div class="commit-label">Response Time</div>
+                                <div class="commit-value">24 hours</div>
+                            </div>
+                            <div class="commit-item">
+                                <div class="commit-label">Countries Served</div>
+                                <div class="commit-value">6 markets</div>
+                            </div>
+                            <div class="commit-item">
+                                <div class="commit-label">On-Time Delivery</div>
+                                <div class="commit-value">100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Map -->
+    <section id="network" class="network-section">
+        <div class="container-full">
+            <div class="section-header center reveal">
+                <div class="section-label">Geographic Coverage</div>
+                <h2 class="section-title">East Africa distribution map</h2>
+                <p class="section-desc">Comprehensive coverage across major trade corridors and key cities</p>
+            </div>
+            <div class="map-container reveal">
+                <div id="map" class="map-element"></div>
+                <div class="map-legend">
+                    <div class="legend-item"><span class="legend-dot primary"></span> Primary Hub</div>
+                    <div class="legend-item"><span class="legend-dot regional"></span> Regional Hubs</div>
+                    <div class="legend-item"><span class="legend-dot kenya"></span> Kenya Network</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section id="quality" class="quality-section">
+        <div class="quality-bg"></div>
+        <div class="container">
+            <div class="section-header center reveal">
+                <div class="section-label">Trust & Compliance</div>
+                <h2 class="section-title">Quality, compliance & trusted supply</h2>
+                <p class="section-desc">We maintain buyer-ready standards across traceability, safety protocols, and comprehensive documentation</p>
+            </div>
+            <div class="quality-showcase reveal">
+                <div class="quality-hero">
+                    <div class="quality-visual">
+                        <div class="progress-circle">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="90" class="progress-bg"></circle>
+                                <circle cx="100" cy="100" r="90" class="progress-bar" data-progress="95"></circle>
+                            </svg>
+                            <div class="progress-value">95%</div>
+                        </div>
+                    </div>
+                    <h3>Traceability Excellence</h3>
+                    <p>Comprehensive batch referencing and packing discipline across our entire supply chain. Every shipment includes full traceability documentation to support distributor accountability and regulatory compliance.</p>
+                    <ul class="quality-features">
+                        <li>Batch-level tracking systems</li>
+                        <li>Digital record keeping</li>
+                        <li>Supplier verification protocols</li>
+                        <li>Chain of custody documentation</li>
+                    </ul>
+                </div>
+                <div class="quality-cards">
+                    <div class="quality-card">
+                        <div class="quality-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h4>Food-Safe Standards</h4>
+                        <p>Handling and packaging practices designed to protect quality and shelf stability. ISO-compliant facilities with regular third-party audits ensuring consistent food safety standards.</p>
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h4>Documentation</h4>
+                        <p>Buyer-ready compliance packs available upon request. Includes certificates of analysis, safety data sheets, and customs documentation for seamless international trade.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="certifications reveal">
+                <h3 class="cert-title">Certifications & Partners</h3>
+                <div class="cert-grid">
+                    <div class="cert-item"><img src="assets/certificates/iso-cert.png" alt="ISO Certification"></div>
+                    <div class="cert-item"><img src="assets/certificates/food-safety.png" alt="Food Safety"></div>
+                    <div class="cert-item"><img src="assets/certificates/export-license.png" alt="Export License"></div>
+                    <div class="cert-item"><img src="assets/certificates/quality-badge.png" alt="Quality Badge"></div>
+                </div>
+                <div class="partners-section">
+                    <h4>Trusted by leading distributors across East Africa</h4>
+                    <div class="partners-grid">
+                        <div class="partner-item"><img src="assets/partners/partner-1.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-2.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-3.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-5.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-6.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-7.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-8.png" alt="Partner"></div>
+                        <div class="partner-item"><img src="assets/partners/partner-9.png" alt="Partner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & RFQ -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header center reveal">
+                <div class="section-label">Get In Touch</div>
+                <h2 class="section-title">Contact & RFQ</h2>
+                <p class="section-desc">Use WhatsApp or email for fast support. For formal procurement, use the RFQ form.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Reach our team</h3>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">📞</div>
+                            <div class="method-content">
+                                <div class="method-label">Phone</div>
+                                <a href="tel:+254721729414">+254 721 729 414</a>
+                                <a href="tel:+254792141742">+254 792 141 742</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">✉️</div>
+                            <div class="method-content">
+                                <div class="method-label">Email</div>
+                                <a href="mailto:popularcommodities@gmail.com">popularcommodities@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">🕐</div>
+                            <div class="method-content">
+                                <div class="method-label">Hours</div>
+                                <span>Mon–Fri • 24h response</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">📍</div>
+                            <div class="method-content">
+                                <div class="method-label">Location</div>
+                                <span>Rangwe Road, Industrial Area<br>Nairobi, Kenya</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/254721729414" class="btn-whatsapp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="mailto:popularcommodities@gmail.com" class="btn-email-link">
+                            <span>📧</span>
+                            <span>Email Sales</span>
+                        </a>
+                    </div>
+                </div>
+                <div id="rfq" class="rfq-form reveal">
+                    <h3>Request for Quote (RFQ)</h3>
+                    <form id="rfqForm">
+                        <div class="form-field">
+                            <label>Product</label>
+                            <input type="text" name="product" id="rfqProduct" placeholder="e.g., Sea Salt Fine (Iodized)" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Pack size</label>
+                                <input type="text" name="pack" placeholder="e.g., 500g">
+                            </div>
+                            <div class="form-field">
+                                <label>Quantity</label>
+                                <input type="text" name="qty" placeholder="e.g., 500 cartons">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label>Destination</label>
+                            <input type="text" name="dest" placeholder="e.g., Kampala, Uganda">
+                        </div>
+                        <div class="form-field">
+                            <label>Additional requirements</label>
+                            <textarea name="msg" rows="4" placeholder="Labeling, delivery timing, documentation..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <span>Send RFQ</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 15l5-5-5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </button>
+                        <p class="form-note">Opens your email app with pre-filled message</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bg"></div>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR">
+                        <div>
+                            <div class="footer-name">VIMAR</div>
+                            <div class="footer-tagline">Kenya Popular Commodities</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Premium sea salt supply for retail, wholesale and export markets across East Africa.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <a href="mailto:popularcommodities@gmail.com">popularcommodities@gmail.com</a>
+                        <a href="tel:+254721729414">+254 721 729 414</a>
+                        <a href="tel:+254792141742">+254 792 141 742</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <a href="#products">Products</a>
+                        <a href="#distribution">Distribution</a>
+                        <a href="#network">Network</a>
+                        <a href="#quality">Quality</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year">2024</span> Kenya Popular Commodities Exporters Limited (VIMAR). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
