@@ -2160,10 +2160,10 @@ button {
     }
     
     .hero {
-        padding: 220px 0 60px;
+        padding: 220px 0 60px !important;
     }
     
-    section {
+    section:not(.hero) {
         padding: 4rem 0 !important;
     }
     
