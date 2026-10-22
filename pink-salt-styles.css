@@ -1574,3 +1574,14 @@ html, body {
         padding: 2rem 1.25rem;
     }
 }
+
+/* Keep attribute widths from overriding height-only CSS sizing */
+.footer-logo-pink img,
+.logo img {
+    width: auto;
+    max-width: 100%;
+}
+
+.visual-frame img {
+    width: 100%;
+}

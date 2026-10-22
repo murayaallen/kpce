@@ -9,6 +9,10 @@
     // Helper functions
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    const CONTACT_EMAIL = 'popularcommodities@gmail.com';
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     // ============= THEME TOGGLE =============
     const themeToggle = $('#themeToggle');
@@ -27,18 +31,33 @@
     }
     
     // ============= LOADER =============
-    window.addEventListener('load', () => {
+    // Previously this waited for window.load plus a flat 2200ms, so on a slow
+    // mobile connection the splash could sit there for many seconds, and if
+    // anything threw before it the page stayed covered for good.
+    (function initLoader() {
         const loader = $('#loader');
-        if (loader) {
+        if (!loader) return;
+
+        let done = false;
+        const hide = () => {
+            if (done) return;
+            done = true;
+            loader.classList.add('hidden');
             setTimeout(() => {
-                loader.classList.add('hidden');
-                setTimeout(() => {
-                    loader.remove();
-                    document.body.style.overflow = '';
-                }, 500);
-            }, 2200);
+                loader.remove();
+                document.body.style.overflow = '';
+            }, 500);
+        };
+
+        if (document.readyState === 'complete') {
+            setTimeout(hide, 400);
+        } else {
+            window.addEventListener('load', () => setTimeout(hide, 600));
         }
-    });
+
+        // Failsafe: never let the splash trap the page.
+        setTimeout(hide, 4000);
+    })();
     
     // ============= CURRENT YEAR =============
     const yearEl = $('#year');
@@ -77,45 +96,53 @@
     const navToggle = $('#navToggle');
     const mobileNav = $('#mobileNav');
     
+    function setBurger(open) {
+        if (!navToggle) return;
+        navToggle.classList.toggle('is-open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function openMobileMenu() {
+        if (!mobileNav) return;
+        mobileNav.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setBurger(true);
+    }
+
+    function closeMobileMenu() {
+        if (!mobileNav) return;
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+        setBurger(false);
+    }
+
     function toggleMobileMenu() {
         if (!navToggle || !mobileNav) return;
-        
-        const isActive = mobileNav.classList.contains('active');
-        mobileNav.classList.toggle('active');
-        document.body.style.overflow = isActive ? '' : 'hidden';
-        
-        // Animate burger
-        const spans = navToggle.querySelectorAll('span');
-        if (!isActive) {
-            spans[0].style.transform = 'rotate(45deg) translate(8px, 8px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
-        } else {
-            spans.forEach(span => {
-                span.style.transform = '';
-                span.style.opacity = '1';
-            });
-        }
+        if (mobileNav.classList.contains('active')) closeMobileMenu();
+        else openMobileMenu();
     }
-    
+
     if (navToggle) {
         navToggle.addEventListener('click', toggleMobileMenu);
+        setBurger(false);
     }
-    
+
     // Close mobile menu on link click
     if (mobileNav) {
         $$('#mobileNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileNav.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
+            link.addEventListener('click', closeMobileMenu);
         });
     }
-    
+
+    // Close the mobile menu with Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+            if (navToggle) navToggle.focus();
+        }
+    });
+
     // ============= SMOOTH SCROLL =============
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
     $$('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -177,7 +204,11 @@
     if ('IntersectionObserver' in window && reveals.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                // A fast fling can carry an element past the viewport between
+                // two observer samples, so it never reports as intersecting and
+                // the content would stay at opacity:0 for good. Treat anything
+                // already above the fold as revealed.
+                if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
                     entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
@@ -186,8 +217,29 @@
             threshold: 0.15,
             rootMargin: '0px 0px -80px 0px'
         });
-        
+
         reveals.forEach(el => observer.observe(el));
+
+        // Belt and braces: anything scrolled past is shown regardless.
+        const sweepReveals = () => {
+            let remaining = 0;
+            reveals.forEach(el => {
+                if (el.classList.contains('visible')) return;
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                } else {
+                    remaining++;
+                }
+            });
+            if (remaining === 0) window.removeEventListener('scroll', onScrollSweep);
+        };
+        let sweepTimer = null;
+        const onScrollSweep = () => {
+            if (sweepTimer) return;
+            sweepTimer = setTimeout(() => { sweepTimer = null; sweepReveals(); }, 200);
+        };
+        window.addEventListener('scroll', onScrollSweep, { passive: true });
     } else {
         // Fallback for older browsers
         reveals.forEach(el => el.classList.add('visible'));
@@ -202,15 +254,20 @@
         if (!dotsContainer || slides.length === 0) return;
         
         let currentSlide = 0;
-        let slideInterval;
-        let isAutoPlaying = true;
+        let slideInterval = null;
+        let fadeTimer = null;
+        let inView = true;
+        let hovered = false;
         
-        // Create dots
+        // Create dots as real buttons so they are focusable and announced
+        dotsContainer.setAttribute('role', 'tablist');
+        dotsContainer.setAttribute('aria-label', 'Product image');
         slides.forEach((_, index) => {
-            const dot = document.createElement('div');
+            const dot = document.createElement('button');
+            dot.type = 'button';
             dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Show image ${index + 1} of ${slides.length}`);
             dot.addEventListener('click', () => {
-                stopAutoPlay();
                 goToSlide(index);
                 startAutoPlay();
             });
@@ -220,30 +277,48 @@
         const dots = product.querySelectorAll('.slider-dot');
         
         function goToSlide(index) {
-            // Add fade-out class to current
+            if (index === currentSlide) return;
+
+            // A pending fade from a previous call would overwrite currentSlide
+            // with a stale value, so settle it before starting a new one.
+            if (fadeTimer) {
+                clearTimeout(fadeTimer);
+                fadeTimer = null;
+                slides.forEach(s => s.classList.remove('fade-out'));
+            }
+
             slides[currentSlide].classList.add('fade-out');
             dots[currentSlide].classList.remove('active');
-            
-            // Small delay for fade-out effect
-            setTimeout(() => {
-                slides[currentSlide].classList.remove('active', 'fade-out');
-                currentSlide = index;
+
+            const from = currentSlide;
+            currentSlide = index;
+
+            fadeTimer = setTimeout(() => {
+                slides[from].classList.remove('active', 'fade-out');
                 slides[currentSlide].classList.add('active');
                 dots[currentSlide].classList.add('active');
+                fadeTimer = null;
             }, 100);
         }
-        
+
         function nextSlide() {
             goToSlide((currentSlide + 1) % slides.length);
         }
-        
+
+        // Always clear first: hover-out and the IntersectionObserver could both
+        // call this and stack intervals, making the slides accelerate.
         function startAutoPlay() {
-            if (!isAutoPlaying) return;
-            slideInterval = setInterval(nextSlide, 4000); // 4 seconds per slide
+            stopAutoPlay();
+            if (!inView || hovered || prefersReducedMotion) return;
+            if (slides.length < 2) return;
+            slideInterval = setInterval(nextSlide, 4000);
         }
-        
+
         function stopAutoPlay() {
-            clearInterval(slideInterval);
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
         }
         
         // Start auto-play immediately
@@ -251,31 +326,33 @@
         
         // Pause on hover, resume on leave
         product.addEventListener('mouseenter', () => {
-            isAutoPlaying = false;
+            hovered = true;
             stopAutoPlay();
         });
-        
+
         product.addEventListener('mouseleave', () => {
-            isAutoPlaying = true;
+            hovered = false;
             startAutoPlay();
         });
-        
+
         // Stop when product card is out of view (performance optimization)
         if ('IntersectionObserver' in window) {
             const slideObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        isAutoPlaying = false;
-                        stopAutoPlay();
-                    } else {
-                        isAutoPlaying = true;
-                        startAutoPlay();
-                    }
+                    inView = entry.isIntersecting;
+                    if (inView) startAutoPlay();
+                    else stopAutoPlay();
                 });
             }, { threshold: 0.1 });
-            
+
             slideObserver.observe(product);
         }
+
+        // Don't keep timers running in a hidden tab
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stopAutoPlay();
+            else startAutoPlay();
+        });
     });
     
     // ============= PRODUCT MODAL =============
@@ -283,6 +360,7 @@
     const modalBackdrop = $('.modal-backdrop');
     const modalClose = $('#modalClose');
     const detailButtons = $$('.btn-details');
+    let lastFocused = null;
     
     const productData = {
         fine: {
@@ -364,7 +442,9 @@
         if (!data || !modal) return;
         
         // Populate modal
-        $('#modalImg').src = data.image;
+        const modalImg = $('#modalImg');
+        modalImg.src = data.image;
+        modalImg.alt = data.title;
         $('#modalTitle').textContent = data.title;
         $('#modalDesc').textContent = data.desc;
         $('#specGrade').textContent = data.grade;
@@ -384,16 +464,43 @@
         });
         
         // Show modal
+        lastFocused = document.activeElement;
         modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        if (modalClose) modalClose.focus();
     }
-    
+
     function closeModal() {
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+        if (!modal) return;
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // Send focus back where it came from instead of dropping it to <body>
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus();
+            lastFocused = null;
         }
     }
+
+    // Keep Tab inside the dialog while it is open
+    function trapFocus(e) {
+        if (e.key !== 'Tab' || !modal || !modal.classList.contains('active')) return;
+        const focusables = Array.from(modal.querySelectorAll(
+            'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        )).filter(el => el.offsetParent !== null);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+    document.addEventListener('keydown', trapFocus);
     
     // Attach event listeners
     detailButtons.forEach(btn => {
@@ -439,6 +546,90 @@
         });
     }
     
+    // ============= RFQ FORM =============
+    // Without this the form had no handler, no action and no method, so
+    // submitting it just reloaded the page and the enquiry was lost.
+    const rfqForm = $('#rfqForm');
+
+    if (rfqForm) {
+        rfqForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(rfqForm);
+            const get = (k) => (formData.get(k) || '').toString().trim();
+            const product = get('product');
+            const pack = get('pack');
+            const qty = get('qty');
+            const dest = get('dest');
+            const msg = get('msg');
+
+            const subject = encodeURIComponent(`RFQ: ${product || 'Sea salt enquiry'}`);
+
+            const bodyLines = [
+                'REQUEST FOR QUOTE',
+                '',
+                `Product: ${product || '-'}`,
+                `Pack size: ${pack || '-'}`,
+                `Quantity: ${qty || '-'}`,
+                `Destination: ${dest || '-'}`,
+                '',
+                'Additional requirements:',
+                msg || '-',
+                '',
+                'Sent via the VIMAR website'
+            ];
+
+            const body = encodeURIComponent(bodyLines.join('\n'));
+            window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+
+            const note = rfqForm.querySelector('.form-note');
+            if (note) {
+                note.textContent = 'Opening your email app… if nothing happens, email ' + CONTACT_EMAIL;
+            }
+        });
+    }
+
+    // ============= QUALITY PROGRESS RING =============
+    // The ring is drawn with stroke-dashoffset; nothing was animating it, so
+    // it sat permanently empty next to the "95%" label.
+    const ring = $('.progress-ring-fill');
+    if (ring) {
+        const target = parseFloat(ring.dataset.progress || '0');
+        const circumference = 2 * Math.PI * (parseFloat(ring.getAttribute('r')) || 90);
+        ring.style.strokeDasharray = String(circumference);
+        ring.style.strokeDashoffset = String(circumference);
+
+        const fill = () => {
+            ring.style.strokeDashoffset = String(circumference * (1 - target / 100));
+        };
+
+        if ('IntersectionObserver' in window) {
+            const ringObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Same fast-scroll guard as the reveals above
+                    if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+                        fill();
+                        ringObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+            ringObs.observe(ring);
+        } else {
+            fill();
+        }
+    }
+
+    // ============= RESPONSIVE SAFETY =============
+    // Opening the mobile menu sets body overflow:hidden. Crossing back above
+    // the breakpoint (rotate / resize) left it stuck, freezing page scroll.
+    function handleResize() {
+        if (window.innerWidth > 768 && mobileNav && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    }
+    window.addEventListener('resize', handleResize, { passive: true });
+    handleResize();
+
     // ============= LEAFLET MAP WITH ALL CITIES =============
     const mapEl = $('#map');
 
@@ -446,14 +637,31 @@
         if (!mapEl || !window.L) return;
 
         try {
-            // Initialize map
+            const isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+
+            // Initialize map. On touch the map starts locked so a swipe over it
+            // scrolls the page instead of being swallowed; tapping unlocks it.
+            // Previously dragging was simply off on every touch device, which
+            // left the map completely unpannable on phones and tablets.
             const map = L.map('map', {
                 zoomControl: false,
                 scrollWheelZoom: false,
-                dragging: !('ontouchstart' in window),
+                dragging: !isTouch,
                 tap: true,
                 doubleClickZoom: true
             }).setView([-1.5, 35.5], 5);
+
+            if (isTouch) {
+                const unlock = document.createElement('button');
+                unlock.type = 'button';
+                unlock.className = 'map-unlock';
+                unlock.innerHTML = '<span>Tap to explore the map</span>';
+                unlock.addEventListener('click', () => {
+                    map.dragging.enable();
+                    unlock.remove();
+                });
+                mapEl.appendChild(unlock);
+            }
 
             // Add zoom control
             L.control.zoom({ position: 'bottomright' }).addTo(map);

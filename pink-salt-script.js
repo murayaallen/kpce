@@ -52,37 +52,38 @@
     const navToggle = $('#navToggle');
     const mobileNav = $('#mobileNav');
     
+    function setBurger(open) {
+        if (!navToggle) return;
+        navToggle.classList.toggle('is-open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function closeMobileMenu() {
+        if (!mobileNav) return;
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+        setBurger(false);
+    }
+
     function toggleMobileMenu() {
         if (!navToggle || !mobileNav) return;
-        
-        const isActive = mobileNav.classList.contains('active');
-        mobileNav.classList.toggle('active');
-        document.body.style.overflow = isActive ? '' : 'hidden';
-        
-        const spans = navToggle.querySelectorAll('span');
-        if (!isActive) {
-            spans[0].style.transform = 'rotate(45deg) translate(8px, 8px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
+        if (mobileNav.classList.contains('active')) {
+            closeMobileMenu();
         } else {
-            spans.forEach(span => {
-                span.style.transform = '';
-                span.style.opacity = '1';
-            });
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setBurger(true);
         }
     }
-    
+
     if (navToggle) {
         navToggle.addEventListener('click', toggleMobileMenu);
+        setBurger(false);
     }
-    
+
     if (mobileNav) {
         $$('#mobileNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileNav.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
+            link.addEventListener('click', closeMobileMenu);
         });
     }
     
@@ -117,7 +118,7 @@
     if ('IntersectionObserver' in window && reveals.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
                     entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
@@ -128,6 +129,28 @@
         });
         
         reveals.forEach(el => observer.observe(el));
+
+        // Fast flings can skip an element between observer samples, leaving it
+        // stuck at opacity:0; sweep anything already scrolled past.
+        let sweepTimer = null;
+        const onScrollSweep = () => {
+            if (sweepTimer) return;
+            sweepTimer = setTimeout(() => {
+                sweepTimer = null;
+                let remaining = 0;
+                reveals.forEach(el => {
+                    if (el.classList.contains('visible')) return;
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add('visible');
+                        observer.unobserve(el);
+                    } else {
+                        remaining++;
+                    }
+                });
+                if (remaining === 0) window.removeEventListener('scroll', onScrollSweep);
+            }, 200);
+        };
+        window.addEventListener('scroll', onScrollSweep, { passive: true });
     } else {
         reveals.forEach(el => el.classList.add('visible'));
     }

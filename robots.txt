@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Block nothing - the whole site should be indexable.
+
+Sitemap: https://murayaallen.github.io/kpce/sitemap.xml

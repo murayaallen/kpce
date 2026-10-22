@@ -83,6 +83,7 @@ body {
     overflow-x: hidden;
     background: var(--bg-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 /* ===========================================
    PREMIUM BLUE BACKGROUND - PARTICLES + HERO IMAGE BLEND
@@ -93,8 +94,11 @@ body {
     position: relative;
 }
 
-/* Ensure site content renders above particles */
-.main-page > :not(.particles-bg) {
+/* Ensure site content renders above particles.
+   Scoped to flow sections only: a blanket :not(.particles-bg) rule would
+   out-specify .nav/.loader/.modal/.progress-bar and kill their position:fixed. */
+.main-page > section,
+.main-page > footer {
     position: relative;
     z-index: 1;
 }
@@ -208,11 +212,13 @@ body {
 .hero-glow { z-index: 2; }
 .hero .container { z-index: 3; }
 
-}
-
 img {
     max-width: 100%;
     display: block;
+    /* Images carry width/height attributes for layout stability. Without this
+       the attribute height wins over CSS aspect-ratio and stretches them.
+       Any rule that sets a height explicitly still out-specifies this. */
+    height: auto;
 }
 
 a {
@@ -1707,14 +1713,20 @@ button {
     stroke-width: 8;
 }
 
-.progress-bar {
+/* Renamed from .progress-bar: that name is taken by the fixed scroll bar at
+   the top of the page, and the two rules were bleeding into each other. */
+.progress-ring-fill {
     fill: none;
     stroke: url(#progressGradient);
     stroke-width: 8;
     stroke-linecap: round;
     stroke-dasharray: 565;
     stroke-dashoffset: 565;
-    transition: stroke-dashoffset 2s ease;
+    transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .progress-ring-fill { transition: none; }
 }
 
 .progress-value {
@@ -2142,7 +2154,7 @@ button {
 
 .footer-main {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.2fr 2fr;
     gap: 4rem;
     margin-bottom: 3rem;
     position: relative;
@@ -2183,8 +2195,8 @@ button {
 
 .footer-links {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
 }
 
 .footer-col h4 {
@@ -2707,5 +2719,589 @@ button {
     
     .img-2 {
         transform: rotate(4deg) translateX(10px);
+    }
+}
+
+/* ==========================================================================
+   FULL SWEEP ADDITIONS
+   Appended last so these rules win on source order where they correct
+   earlier declarations.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO - FLOATING PRODUCT RANGE
+   Soft, cloud-like floating packshots beside the hero copy. Only enabled
+   from 1100px up, so the mobile hero keeps its original single-column shape.
+   -------------------------------------------------------------------------- */
+
+.hero-floats {
+    display: none;
+}
+
+.hero-float {
+    position: absolute;
+    margin: 0;
+    width: clamp(150px, 13vw, 208px);
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    box-shadow:
+        0 28px 60px -18px rgba(3, 10, 22, 0.75),
+        0 10px 24px -12px rgba(3, 10, 22, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transform: translate3d(0, 0, 0);
+    animation: heroFloat 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform;
+}
+
+.hero-float img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.06) contrast(1.04);
+}
+
+.hero-float figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.7rem 0.9rem 0.85rem;
+    background: linear-gradient(180deg, rgba(10, 22, 40, 0.1), rgba(10, 22, 40, 0.45));
+}
+
+.hero-float .float-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    line-height: 1.25;
+}
+
+.hero-float .float-meta {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.3;
+}
+
+/* Staggered offsets and speeds so the group drifts rather than pulsing in sync */
+.hero-float--1 { top: 2%;  left: 4%;  animation-duration: 9s;    animation-delay: 0s; }
+.hero-float--2 { top: 26%; right: 2%; animation-duration: 11s;   animation-delay: -1.6s; }
+.hero-float--3 { top: 56%; left: 0%;  animation-duration: 10.5s; animation-delay: -3.1s; }
+.hero-float--4 { top: 70%; right: 8%; animation-duration: 12s;   animation-delay: -4.7s; }
+
+/* Soft cloud glow behind the cluster to lift it off the gradient */
+.hero-floats::before {
+    content: "";
+    position: absolute;
+    inset: 6% 2% 10%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 45%,
+        rgba(20, 184, 166, 0.3) 0%,
+        rgba(59, 123, 163, 0.18) 45%,
+        rgba(10, 22, 40, 0) 72%);
+    filter: blur(44px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes heroFloat {
+    0%,  100% { transform: translate3d(0, 0, 0) rotate(-0.6deg); }
+    50%       { transform: translate3d(0, -16px, 0) rotate(0.6deg); }
+}
+
+@media (min-width: 1100px) {
+    .hero .container {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .hero-content {
+        max-width: 660px;
+    }
+
+    .hero-floats {
+        display: block;
+        position: relative;
+        min-height: 520px;
+        isolation: isolate;
+    }
+}
+
+@media (min-width: 1400px) {
+    .hero-content { max-width: 700px; }
+    .hero-floats { min-height: 580px; }
+}
+
+/* --------------------------------------------------------------------------
+   2. BURGER MENU
+   The open/closed bars used to be set as inline styles from JS; this moves
+   the animation into CSS, driven by the .is-open class.
+   -------------------------------------------------------------------------- */
+
+.toggle span {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s ease;
+}
+
+.toggle.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.toggle.is-open span:nth-child(2) { opacity: 0; }
+.toggle.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* --------------------------------------------------------------------------
+   3. MOBILE NAV - REACHABILITY
+   height:100vh plus no scrolling meant the lower links were unreachable on
+   short screens and under iOS browser chrome.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 104px 1.5rem 3rem;
+        gap: 1.35rem;
+        justify-content: flex-start;
+        overscroll-behavior: contain;
+    }
+
+    .mobile-nav a {
+        font-size: 1.3rem;
+        padding: 0.5rem 0.75rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+        border-radius: 12px;
+    }
+}
+
+/* Hero uses viewport units; svh keeps it from overshooting on mobile */
+@supports (min-height: 100svh) {
+    .hero { min-height: 100svh; }
+}
+
+/* --------------------------------------------------------------------------
+   4. MAP - TOUCH UNLOCK OVERLAY
+   On touch devices the map starts locked so a swipe scrolls the page.
+   -------------------------------------------------------------------------- */
+
+.map-element { position: relative; }
+
+.map-unlock {
+    position: absolute;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: rgba(10, 22, 40, 0.34);
+    -webkit-backdrop-filter: blur(1.5px);
+    backdrop-filter: blur(1.5px);
+    border: 0;
+    font: inherit;
+    color: #FFFFFF;
+}
+
+.map-unlock span {
+    background: rgba(10, 22, 40, 0.88);
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+}
+
+/* --------------------------------------------------------------------------
+   5. TAP TARGETS
+   8px dots and small icon buttons were far below the 44px guideline.
+   -------------------------------------------------------------------------- */
+
+.slider-dots {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.slider-dot {
+    position: relative;
+    border: 0;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+/* Invisible 44px hit area without changing the visual dot size */
+.slider-dot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+}
+
+/* Only grow the hit area. Setting `display` here would override
+   `.toggle { display: none }` and leak the burger onto desktop. */
+.theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.toggle {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.contact-method a,
+.footer-col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+}
+
+/* --------------------------------------------------------------------------
+   6. VISIBLE FOCUS
+   Keyboard users had no focus indicator anywhere.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+    outline: 3px solid var(--teal-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.hero :focus-visible,
+.footer :focus-visible {
+    outline-color: var(--gold-400);
+}
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVE SWEEP
+   Fills the gaps between the original 1024 / 768 / 480 breakpoints and
+   stops long strings from forcing horizontal scroll.
+   -------------------------------------------------------------------------- */
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Long emails and URLs were the main source of sideways scroll on phones */
+.contact-method a,
+.footer-col a,
+.method-content a,
+.quote-text,
+.body-text,
+.lead-text {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+img, svg, video, canvas {
+    max-width: 100%;
+}
+
+@media (max-width: 1099px) {
+    .hero-content { max-width: 100%; }
+}
+
+@media (max-width: 900px) {
+    .quality-cards { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .progress-circle { width: 168px; height: 168px; }
+}
+
+@media (max-width: 768px) {
+    .footer-links { gap: 2rem; }
+    .map-element { height: 420px; }
+    .map-legend {
+        position: static;
+        margin: 1rem 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .partners-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .modal-container { max-height: 92dvh; overflow-y: auto; }
+    .modal-image { height: 220px; }
+    .about-glass,
+    .rfq-form { padding: 1.75rem 1.4rem; }
+    .section-title { font-size: clamp(1.7rem, 7vw, 2.25rem); }
+    .dist-hero-number { font-size: clamp(3.5rem, 18vw, 5rem); }
+    .serve-item { gap: 0.6rem; }
+    .commit-value { font-size: 1.35rem; }
+}
+
+/* Small phones: 400px and below, very common in East African markets */
+@media (max-width: 400px) {
+    .container,
+    .container-wide,
+    .container-full { padding: 0 1rem; }
+
+    .hero { padding: 132px 0 48px !important; }
+    .hero-title { font-size: clamp(1.9rem, 10vw, 2.3rem); line-height: 1.12; }
+    .hero-desc { font-size: 0.97rem; }
+    .hero-badge { font-size: 0.72rem; padding: 0.5rem 0.8rem; }
+    .hero-badge span:last-child { line-height: 1.35; }
+
+    .partners-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .progress-circle { width: 148px; height: 148px; }
+    .progress-value { font-size: 1.6rem; }
+
+    .nav-wrap { padding: 0.6rem 0; }
+    .logo img { height: 34px; }
+    .brand { font-size: 1rem; }
+    .sub { font-size: 0.62rem; }
+
+    .texture-details,
+    .product-content { padding: 1.25rem; }
+
+    .footer-logo img { height: 38px; }
+}
+
+/* --------------------------------------------------------------------------
+   8. REDUCED MOTION
+   The JS only honoured this for scrolling; the CSS animations ran regardless.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html { scroll-behavior: auto; }
+
+    .particles-bg,
+    .teaser-bg-shapes,
+    .hero-floats::before { display: none; }
+
+    .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   9. PRINT
+   -------------------------------------------------------------------------- */
+
+@media print {
+    .loader,
+    .progress-bar,
+    .particles-bg,
+    .nav,
+    .mobile-nav,
+    .modal,
+    .hero-floats,
+    .map-container,
+    .teaser-bg-shapes,
+    .btn-primary,
+    .btn-secondary,
+    .btn-whatsapp,
+    .btn-email-link,
+    .btn-submit { display: none !important; }
+
+    body { background: #FFFFFF !important; color: #000000 !important; }
+
+    .hero {
+        min-height: auto !important;
+        padding: 1.5rem 0 !important;
+        background: #FFFFFF !important;
+        color: #000000 !important;
+    }
+
+    .hero-title,
+    .hero-desc,
+    .hero-badge { color: #000000 !important; }
+
+    section { padding: 1rem 0 !important; page-break-inside: avoid; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   10. IMAGE SIZING GUARD
+   These images carry width/height attributes (for layout stability) but the
+   CSS only constrains their height. Without width:auto the attribute width
+   wins and the logo blows out the nav on small screens.
+   -------------------------------------------------------------------------- */
+
+.logo img,
+.footer-logo img,
+.logo-load img {
+    width: auto;
+    max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   11. NAV FIT ON SMALL SCREENS
+   .logo had flex-shrink:0 and .nav-wrap 2rem side padding plus 2rem gaps, so
+   at 320-390px the burger button was pushed past the right edge and could not
+   be tapped at all. Let the brand block shrink and tighten the chrome.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .nav-wrap {
+        padding: 0.85rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .logo {
+        flex-shrink: 1;
+        min-width: 0;
+        gap: 0.6rem;
+    }
+
+    .logo > div {
+        min-width: 0;
+    }
+
+    .brand,
+    .sub {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (max-width: 420px) {
+    /* Below this the subtitle cannot fit next to two 44px buttons */
+    .logo .sub {
+        display: none;
+    }
+
+    .nav-wrap {
+        padding: 0.7rem 0.75rem;
+        gap: 0.5rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   12. NAV FIT ON LAPTOPS
+   At ~1280-1400px the 2.5rem menu gaps plus the pill button overflowed the
+   nav and clipped "Request Quote". Tighten gaps before the mobile breakpoint.
+   -------------------------------------------------------------------------- */
+
+.menu {
+    flex-wrap: nowrap;
+}
+
+.btn-nav {
+    white-space: nowrap;
+}
+
+@media (min-width: 769px) and (max-width: 1500px) {
+    .nav-wrap {
+        gap: 1rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .menu {
+        gap: 1.4rem;
+    }
+
+    .menu a {
+        font-size: 0.9rem;
+    }
+
+    .btn-nav {
+        padding: 0.65rem 1.1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1150px) {
+    .menu { gap: 1rem; }
+    .menu a { font-size: 0.84rem; }
+    .logo .sub { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   13. NAV QUOTE BUTTON
+   `.menu a` (0,1,1) out-specifies `.btn-nav` (0,1,0), so the pill was being
+   rendered with `padding: 0.5rem 0` and its label ran to the edges.
+   -------------------------------------------------------------------------- */
+
+.menu a.btn-nav {
+    padding: 0.7rem 1.5rem;
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+@media (min-width: 769px) and (max-width: 1500px) {
+    .menu a.btn-nav { padding: 0.6rem 1.1rem; }
+}
+
+@media (min-width: 769px) and (max-width: 1150px) {
+    .menu a.btn-nav { padding: 0.55rem 0.9rem; }
+}
+
+/* Float images must derive height from aspect-ratio, not the attribute */
+.hero-float img {
+    height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   14. HERO LEGIBILITY
+   The background photo is a product line-up, so the floating packshots and
+   the headline were competing with jars behind them. Deepen the scrim on the
+   right where the floats sit and keep the left clear for the copy.
+   -------------------------------------------------------------------------- */
+
+.hero-image-overlay {
+    background:
+        linear-gradient(100deg,
+            rgba(10, 22, 40, 0.90) 0%,
+            rgba(10, 22, 40, 0.74) 38%,
+            rgba(21, 48, 75, 0.68) 62%,
+            rgba(44, 98, 135, 0.72) 100%),
+        linear-gradient(180deg,
+            rgba(10, 22, 40, 0.35) 0%,
+            rgba(10, 22, 40, 0.10) 45%,
+            rgba(10, 22, 40, 0.55) 100%);
+    mix-blend-mode: normal;
+}
+
+.hero-image {
+    filter: saturate(0.85) contrast(0.95);
+}
+
+@media (max-width: 768px) {
+    /* No floats on mobile, so let more of the photo through */
+    .hero-image-overlay {
+        background: linear-gradient(180deg,
+            rgba(10, 22, 40, 0.86) 0%,
+            rgba(10, 22, 40, 0.72) 50%,
+            rgba(44, 98, 135, 0.78) 100%);
     }
 }
