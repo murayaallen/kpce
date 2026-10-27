@@ -546,6 +546,118 @@
         });
     }
     
+    // ============= HERO PRODUCT STAGE =============
+    // One cut-out holds the frame at a time; the set crossfades on a timer and
+    // the tint behind it follows the active jar's label colour.
+    (function heroStage() {
+        const stage = $('#heroStage');
+        if (!stage) return;
+
+        const items = Array.from(stage.querySelectorAll('.stage-item'));
+        const dotsWrap = $('#stageDots');
+        const cap = $('#stageCap');
+        if (items.length < 2 || !dotsWrap || !cap) return;
+
+        const INTERVAL = 5000;
+        let current = 0;
+        let timer = null;
+        let hovered = false;
+        let inView = true;
+
+        const dots = items.map((item, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', item.dataset.name || `Product ${i + 1}`);
+            b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+            b.addEventListener('click', () => {
+                show(i);
+                restart();
+            });
+            dotsWrap.appendChild(b);
+            return b;
+        });
+
+        function show(next) {
+            if (next === current) return;
+            const from = items[current];
+            const to = items[next];
+
+            from.classList.remove('is-active');
+            from.classList.add('is-leaving');
+            // Clear the leaving state once the transition has had time to run,
+            // otherwise the class sticks and the jar re-enters from the wrong
+            // place next time round.
+            setTimeout(() => from.classList.remove('is-leaving'), 900);
+
+            to.classList.add('is-active');
+
+            dots[current].setAttribute('aria-selected', 'false');
+            dots[next].setAttribute('aria-selected', 'true');
+
+            const tint = to.dataset.tint;
+            if (tint) stage.style.setProperty('--tint', tint);
+
+            cap.innerHTML = '';
+            const b = document.createElement('b');
+            b.textContent = to.dataset.name || '';
+            const s = document.createElement('span');
+            // data-meta carries a &middot; which parses to the character here
+            s.textContent = (to.dataset.meta || '').replace(/&middot;/g, '·');
+            cap.appendChild(b);
+            cap.appendChild(s);
+
+            current = next;
+        }
+
+        function tick() {
+            show((current + 1) % items.length);
+        }
+
+        function start() {
+            stop();
+            if (hovered || !inView || prefersReducedMotion) return;
+            timer = setInterval(tick, INTERVAL);
+        }
+
+        function stop() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function restart() {
+            stop();
+            start();
+        }
+
+        stage.addEventListener('mouseenter', () => { hovered = true; stop(); });
+        stage.addEventListener('mouseleave', () => { hovered = false; start(); });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stop();
+            else start();
+        });
+
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    inView = e.isIntersecting;
+                    if (inView) start();
+                    else stop();
+                });
+            }, { threshold: 0.2 });
+            obs.observe(stage);
+        }
+
+        // Seed the tint from the jar that starts active
+        const first = items[0].dataset.tint;
+        if (first) stage.style.setProperty('--tint', first);
+
+        start();
+    })();
+
     // ============= RFQ FORM =============
     // Without this the form had no handler, no action and no method, so
     // submitting it just reloaded the page and the enquiry was lost.

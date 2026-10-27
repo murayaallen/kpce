@@ -351,25 +351,45 @@
                 </div>
             </div>
 
-            <!-- Floating product range. Decorative, so hidden from assistive tech;
-                 only shown from 1100px up where there is room beside the copy. -->
-            <div class="hero-floats" aria-hidden="true">
-                <figure class="hero-float hero-float--1">
-                    <img src="assets/packshots/fine-500g.jpg" alt="" loading="lazy" decoding="async" width="720" height="720">
-                    <figcaption><span class="float-name">Sea Salt Fine</span><span class="float-meta">Iodized &middot; 500g</span></figcaption>
-                </figure>
-                <figure class="hero-float hero-float--2">
-                    <img src="assets/packshots/powder-500g.jpg" alt="" loading="lazy" decoding="async" width="720" height="720">
-                    <figcaption><span class="float-name">Fine Powder</span><span class="float-meta">Baking &middot; 500g</span></figcaption>
-                </figure>
-                <figure class="hero-float hero-float--3">
-                    <img src="assets/packshots/coarse-500g.jpg" alt="" loading="lazy" decoding="async" width="720" height="720">
-                    <figcaption><span class="float-name">Sea Salt Coarse</span><span class="float-meta">Brining &middot; 1kg</span></figcaption>
-                </figure>
-                <figure class="hero-float hero-float--4">
-                    <img src="assets/packshots/pink-500g.jpg" alt="" loading="lazy" decoding="async" width="720" height="720">
-                    <figcaption><span class="float-name">Himalayan Pink</span><span class="float-meta">Gourmet &middot; 500g</span></figcaption>
-                </figure>
+            <!-- Hero product stage. One cut-out holds the frame at a time and
+                 the set crossfades; the tint behind it is keyed to the label
+                 colour so a swap registers even though every jar shares a
+                 silhouette and the same blue lid. -->
+            <div class="hero-stage" id="heroStage">
+                <div class="stage-glow" aria-hidden="true"></div>
+                <div class="stage-items">
+                    <figure class="stage-item is-active" data-name="Sea Salt Fine" data-meta="Iodized &middot; 500g" data-tint="52, 168, 108">
+                        <picture>
+                            <source srcset="assets/cutouts/fine.webp" type="image/webp">
+                            <img src="assets/cutouts/fine.png" alt="VIMAR Sea Salt Fine, iodized, 500g jar" width="560" height="560" fetchpriority="high" decoding="async">
+                        </picture>
+                    </figure>
+                    <figure class="stage-item" data-name="Sea Salt Fine Powder" data-meta="Baking &middot; 500g" data-tint="214, 78, 74">
+                        <picture>
+                            <source srcset="assets/cutouts/powder.webp" type="image/webp">
+                            <img src="assets/cutouts/powder.png" alt="VIMAR Sea Salt Fine Powder, 500g jar" width="560" height="560" loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <figure class="stage-item" data-name="Sea Salt Coarse" data-meta="Brining &middot; 500g" data-tint="226, 178, 44">
+                        <picture>
+                            <source srcset="assets/cutouts/coarse.webp" type="image/webp">
+                            <img src="assets/cutouts/coarse.png" alt="VIMAR Sea Salt Coarse, 500g jar" width="560" height="560" loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <figure class="stage-item" data-name="Himalayan Pink Salt" data-meta="Gourmet &middot; 500g" data-tint="226, 122, 158">
+                        <picture>
+                            <source srcset="assets/cutouts/pink.webp" type="image/webp">
+                            <img src="assets/cutouts/pink.png" alt="VIMAR Himalayan Pink Salt, 500g jar" width="560" height="560" loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                </div>
+                <div class="stage-pool" aria-hidden="true"></div>
+                <div class="stage-meta">
+                    <p class="stage-cap" id="stageCap" aria-live="polite">
+                        <b>Sea Salt Fine</b><span>Iodized &middot; 500g</span>
+                    </p>
+                    <div class="stage-dots" id="stageDots" role="tablist" aria-label="Choose a product"></div>
+                </div>
             </div>
         </div>
     </section>
