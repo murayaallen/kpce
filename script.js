@@ -558,7 +558,7 @@
         const cap = $('#stageCap');
         if (items.length < 2 || !dotsWrap || !cap) return;
 
-        const INTERVAL = 5000;
+        const INTERVAL = 3000;
         let current = 0;
         let timer = null;
         let hovered = false;
@@ -616,7 +616,11 @@
 
         function start() {
             stop();
-            if (hovered || !inView || prefersReducedMotion) return;
+            if (hovered || !inView) return;
+            // Reduced motion still advances, it just does not animate: the CSS
+            // collapses the transitions, so the product swaps without movement.
+            // Stopping the timer outright left the hero looking broken for
+            // anyone with "reduce motion" enabled in their OS.
             timer = setInterval(tick, INTERVAL);
         }
 
