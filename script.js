@@ -260,13 +260,16 @@
         let hovered = false;
         
         // Create dots as real buttons so they are focusable and announced
-        dotsContainer.setAttribute('role', 'tablist');
+        // Not a tablist: that role promises role="tab" children wired to
+        // tabpanels, and these only choose which photo of one product shows.
+        dotsContainer.setAttribute('role', 'group');
         dotsContainer.setAttribute('aria-label', 'Product image');
         slides.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
             dot.setAttribute('aria-label', `Show image ${index + 1} of ${slides.length}`);
+            dot.setAttribute('aria-current', index === 0 ? 'true' : 'false');
             dot.addEventListener('click', () => {
                 goToSlide(index);
                 startAutoPlay();
@@ -289,6 +292,8 @@
 
             slides[currentSlide].classList.add('fade-out');
             dots[currentSlide].classList.remove('active');
+            dots[currentSlide].setAttribute('aria-current', 'false');
+            dots[index].setAttribute('aria-current', 'true');
 
             const from = currentSlide;
             currentSlide = index;
@@ -567,9 +572,11 @@
         const dots = items.map((item, i) => {
             const b = document.createElement('button');
             b.type = 'button';
-            b.setAttribute('role', 'tab');
+            // Plain buttons in a group, not tabs: role="tab" requires a
+            // tablist parent and a tabpanel to control, and the hero stage
+            // has neither.
             b.setAttribute('aria-label', item.dataset.name || `Product ${i + 1}`);
-            b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+            b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
             b.addEventListener('click', () => {
                 show(i);
                 restart();
@@ -592,8 +599,8 @@
 
             to.classList.add('is-active');
 
-            dots[current].setAttribute('aria-selected', 'false');
-            dots[next].setAttribute('aria-selected', 'true');
+            dots[current].setAttribute('aria-current', 'false');
+            dots[next].setAttribute('aria-current', 'true');
 
             const tint = to.dataset.tint;
             if (tint) stage.style.setProperty('--tint', tint);

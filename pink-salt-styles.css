@@ -29,6 +29,16 @@
     overflow-x: hidden;
 }
 
+/* The particle canvas is fixed at z-index 0, so page content has to be lifted
+   above it. Every section here happens to position itself already, but a new
+   one that forgets would disappear behind the particles; lifting <main> once
+   covers all of them. */
+.pink-salt-page > main,
+.pink-salt-page > footer {
+    position: relative;
+    z-index: 1;
+}
+
 /* Animated Background Particles */
 .particles-bg {
     position: fixed;
@@ -341,7 +351,9 @@
 
 .btn-pink-primary {
     background: var(--white);
-    color: var(--pink-primary);
+    /* --pink-primary is 3.53:1 on white, under the 4.5:1 this size and weight
+       needs. --pink-dark is the same hue and clears it at 4.6:1. */
+    color: var(--pink-dark);
     box-shadow: 0 10px 30px rgba(236,72,153,0.3);
 }
 

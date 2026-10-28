@@ -247,7 +247,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body class="main-page" id="top">
     
@@ -279,12 +279,14 @@
     </div>
 
     <!-- Navigation -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <nav class="nav" id="nav">
         <div class="nav-wrap">
             <a href="#top" class="logo" aria-label="VIMAR home">
                 <picture>
                     <source srcset="assets/logo/VIMAR_LOGO.webp" type="image/webp">
-                    <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="192" height="192">
+                    <img src="assets/logo/VIMAR_LOGO.png" alt="" decoding="async" width="192" height="192">
                 </picture>
                 <div>
                     <div class="brand">VIMAR</div>
@@ -322,6 +324,7 @@
     </nav>
 
     <!-- Hero -->
+    <main id="main">
     <section class="hero">
         <div class="hero-pattern"></div>
         <div class="hero-glow"></div>
@@ -402,7 +405,7 @@
                     <p class="stage-cap" id="stageCap" aria-live="polite">
                         <b>Sea Salt Fine</b><span>Iodized &middot; 1kg</span>
                     </p>
-                    <div class="stage-dots" id="stageDots" role="tablist" aria-label="Choose a product"></div>
+                    <div class="stage-dots" id="stageDots" role="group" aria-label="Choose a product"></div>
                 </div>
             </div>
         </div>
@@ -434,7 +437,7 @@
                                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h4>Consistency</h4>
+                        <h3>Consistency</h3>
                         <p>Controlled grading across formats for predictable results.</p>
                     </div>
                     <div class="pillar-card">
@@ -443,7 +446,7 @@
                                 <path d="M4 5h4v7H4zm10 0h4v7h-4zM4 16h4v3H4zm10 0h4v3h-4z"/>
                             </svg>
                         </div>
-                        <h4>Flexibility</h4>
+                        <h3>Flexibility</h3>
                         <p>Retail packs, cartons, and order-based packaging support.</p>
                     </div>
                     <div class="pillar-card">
@@ -452,7 +455,7 @@
                                 <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                             </svg>
                         </div>
-                        <h4>Support</h4>
+                        <h3>Support</h3>
                         <p>RFQ, samples, planning support, and buyer documentation.</p>
                     </div>
                 </div>
@@ -1128,6 +1131,8 @@
     </section>
 
     <!-- Footer -->
+    </main>
+
     <footer class="footer">
         <div class="footer-bg"></div>
         <div class="container">
@@ -1136,7 +1141,7 @@
                     <div class="footer-logo">
                         <picture>
                             <source srcset="assets/logo/VIMAR_LOGO.webp" type="image/webp">
-                            <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="192" height="192">
+                            <img src="assets/logo/VIMAR_LOGO.png" alt="" decoding="async" width="192" height="192">
                         </picture>
                         <div>
                             <div class="footer-name">VIMAR</div>
@@ -1175,6 +1180,6 @@
     </footer>
 
 <!-- Scripts -->
-<script src="script.js?v=6" defer></script>
+<script src="script.js?v=7" defer></script>
 </body>
 </html>

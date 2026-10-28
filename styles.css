@@ -97,6 +97,7 @@ body {
 /* Ensure site content renders above particles.
    Scoped to flow sections only: a blanket :not(.particles-bg) rule would
    out-specify .nav/.loader/.modal/.progress-bar and kill their position:fixed. */
+.main-page > main,
 .main-page > section,
 .main-page > footer {
     position: relative;
@@ -890,7 +891,7 @@ button {
     color: var(--white);
 }
 
-.pillar-card h4 {
+.pillar-card h3 {
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--white);
@@ -3420,7 +3421,7 @@ img, svg, video, canvas {
                 background 0.4s ease;
 }
 
-.stage-dots button[aria-selected="true"]::before {
+.stage-dots button[aria-current="true"]::before {
     width: 20px;
     background: rgb(var(--tint));
 }
@@ -3575,4 +3576,30 @@ img, svg, video, canvas {
             rgba(10, 22, 40, 0.62) 50%,
             rgba(28, 74, 107, 0.70) 100%);
     }
+}
+
+/* --------------------------------------------------------------------------
+   18. SKIP LINK
+   Off-screen until focused, so a keyboard visitor can jump the nav rather
+   than tabbing through every link on the way to the content.
+   -------------------------------------------------------------------------- */
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    padding: 0.85rem 1.5rem;
+    background: var(--blue-900, #0A1628);
+    color: #fff;
+    font-weight: 700;
+    border-bottom-right-radius: 12px;
+    /* translate rather than display:none, so it stays in the focus order */
+    transform: translateY(-120%);
+    transition: transform 0.18s ease;
+}
+
+.skip-link:focus-visible,
+.skip-link:focus {
+    transform: translateY(0);
 }
