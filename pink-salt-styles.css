@@ -1622,3 +1622,180 @@ html, body {
 @media (min-width: 769px) and (max-width: 1150px) {
     .menu a.btn-nav-back { padding: 0.55rem 1rem; }
 }
+
+/* --------------------------------------------------------------------------
+   HERO LEGIBILITY
+   Sampling the rendered pixels behind the hero text found the worst of them
+   at 2.18:1 against the white headline, where 3:1 is the minimum, and 2.25:1
+   behind the description, which needs 4.5:1.
+
+   The cause is that the page background is cream. `.hero-image-overlay`
+   tints with `mix-blend-mode: multiply`, and multiplying a colour over a
+   light base can only take it so far down, so the photo stayed bright enough
+   to swallow white text. This scrim is a plain layer with no blend mode, so
+   it darkens regardless of what is under it.
+
+   Weighted to the left, where the copy sits, so the lick block and the goats
+   on the right still read as a photograph.
+   -------------------------------------------------------------------------- */
+
+.pink-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* above the orbs (1) and the photo (2), below the copy (10) */
+    z-index: 3;
+    pointer-events: none;
+    background:
+        linear-gradient(100deg,
+            rgba(38, 12, 27, 0.86) 0%,
+            rgba(38, 12, 27, 0.78) 34%,
+            rgba(38, 12, 27, 0.44) 62%,
+            rgba(38, 12, 27, 0.20) 100%),
+        linear-gradient(180deg,
+            rgba(38, 12, 27, 0.42) 0%,
+            rgba(38, 12, 27, 0.05) 40%,
+            rgba(38, 12, 27, 0.30) 100%);
+}
+
+/* The copy spans the full width on a phone, so the horizontal fade has
+   nothing to fade towards; even it out instead. */
+@media (max-width: 768px) {
+    .pink-hero::after {
+        background:
+            linear-gradient(180deg,
+                rgba(38, 12, 27, 0.80) 0%,
+                rgba(38, 12, 27, 0.72) 45%,
+                rgba(38, 12, 27, 0.80) 100%);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   HERO FITS THE FOLD
+   The hero was a flat 956px tall at every viewport, because the title sizes
+   off `10vw` and the padding is fixed. On a 1366x768 laptop -- still the most
+   common laptop resolution there is -- that left the call to action 108px
+   below the fold, 156px below it at 1280x720, and 125px below on a 360x640
+   phone. A visitor on any of those never saw a button without scrolling.
+
+   Sizing the type and the vertical rhythm on vh as well as vw pulls the whole
+   block back up. Taller screens are untouched and keep the full-size title.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 769px) and (max-height: 920px) {
+    .pink-hero {
+        padding: 128px 0 48px !important;
+    }
+
+    .hero-badge-float {
+        padding: 0.7rem 1.6rem;
+        font-size: 0.9rem;
+        margin-bottom: clamp(0.9rem, 2.2vh, 2rem);
+    }
+
+    .hero-title-big {
+        font-size: clamp(2.6rem, 9.4vh, 7rem);
+        margin-bottom: clamp(0.9rem, 2.4vh, 2rem);
+    }
+
+    .hero-desc-large {
+        font-size: clamp(1rem, 2.1vh, 1.5rem);
+        line-height: 1.6;
+        margin-bottom: clamp(1.1rem, 3vh, 3rem);
+    }
+
+    .btn-pink-primary,
+    .btn-pink-outline {
+        padding: 0.95rem 2rem;
+        font-size: 1rem;
+    }
+
+    .hero-cta-group {
+        gap: 1rem;
+        margin-bottom: clamp(1.1rem, 2.8vh, 3rem);
+    }
+
+    .trust-item {
+        font-size: 0.95rem;
+    }
+
+    .hero-trust-badges {
+        gap: 1.5rem;
+    }
+}
+
+/* Short phones, where the same thing happens for the same reason. */
+@media (max-width: 768px) and (max-height: 780px) {
+    .pink-hero {
+        padding: 108px 0 36px !important;
+    }
+
+    .hero-badge-float {
+        margin-bottom: 0.9rem;
+        padding: 0.6rem 1.3rem;
+        font-size: 0.85rem;
+    }
+
+    .hero-title-big {
+        font-size: clamp(2rem, 7.6vh, 3rem);
+        margin-bottom: 0.9rem;
+    }
+
+    .hero-desc-large {
+        font-size: 1rem;
+        line-height: 1.55;
+        margin-bottom: 1.1rem;
+    }
+
+    .btn-pink-primary,
+    .btn-pink-outline {
+        padding: 0.85rem 1.6rem;
+        font-size: 0.95rem;
+    }
+
+    .hero-cta-group {
+        gap: 0.75rem;
+        margin-bottom: 1.1rem;
+    }
+}
+
+/* The scroll cue is absolutely positioned at the bottom of the hero, so on a
+   short screen it lands on top of the trust badges. On a phone the hint is
+   redundant anyway -- the page scrolls under your thumb -- so it goes; on a
+   short laptop it just moves down out of the way. */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) and (max-height: 920px) {
+    .scroll-indicator {
+        bottom: 1.25rem;
+    }
+}
+
+/* The smallest phones still in use (320x568) need one more step down. */
+@media (max-width: 768px) and (max-height: 620px) {
+    .pink-hero {
+        padding: 96px 0 28px !important;
+    }
+
+    .hero-badge-float {
+        margin-bottom: 0.7rem;
+    }
+
+    .hero-title-big {
+        margin-bottom: 0.7rem;
+    }
+
+    .hero-desc-large {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 0.9rem;
+    }
+
+    .hero-cta-group {
+        margin-bottom: 0.9rem;
+    }
+}
