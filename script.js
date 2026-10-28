@@ -839,8 +839,18 @@
         }
     }
 
+    const LEAFLET_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    const LEAFLET_JS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    let leafletRequested = false;
+
+    function mapFailed(reason) {
+        console.error(reason);
+        mapEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748B;font-weight:600;">Map failed to load. Please refresh.</div>';
+    }
+
     function loadLeafletThenInit() {
-        if (!mapEl) return;
+        if (!mapEl || leafletRequested) return;
+        leafletRequested = true;
 
         // If Leaflet is already present, init immediately
         if (window.L) {
@@ -848,16 +858,46 @@
             return;
         }
 
-        // Dynamically load Leaflet as a fallback (covers blocked SRI / CDN hiccups)
+        // The stylesheet used to sit in the <head>, where it blocked the first
+        // render on a third-party connection for a section most visitors never
+        // reach. Both files are fetched here instead, at the point of use.
+        //
+        // Wait for the CSS as well as the script: Leaflet measures the
+        // container when L.map() runs, and an unstyled .leaflet-container has
+        // no dimensions, which lands every tile in the wrong place.
+        let pending = 2;
+        const ready = () => { if (--pending === 0) initLeafletMap(); };
+
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = LEAFLET_CSS;
+        css.onload = ready;
+        // A blocked stylesheet should not cost us the map entirely.
+        css.onerror = ready;
+        document.head.appendChild(css);
+
         const s = document.createElement('script');
-        s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-        s.onload = initLeafletMap;
-        s.onerror = () => {
-            console.error('Leaflet script failed to load.');
-            mapEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748B;font-weight:600;">Map failed to load (Leaflet unavailable).</div>';
-        };
+        s.src = LEAFLET_JS;
+        s.onload = ready;
+        s.onerror = () => { pending = Infinity; mapFailed('Leaflet script failed to load.'); };
         document.head.appendChild(s);
     }
 
-    loadLeafletThenInit();
+    // Roughly 190KB of CSS and JS for a section a long way down the page, so
+    // it is fetched only once the map is close to being seen. The margin gives
+    // it a head start, and the boundingClientRect check covers a fast fling
+    // that carries the map past the viewport between two observer samples.
+    if (mapEl) {
+        if ('IntersectionObserver' in window) {
+            const mapObserver = new IntersectionObserver((entries, obs) => {
+                if (entries.some(e => e.isIntersecting || e.boundingClientRect.top < 0)) {
+                    obs.disconnect();
+                    loadLeafletThenInit();
+                }
+            }, { rootMargin: '500px 0px' });
+            mapObserver.observe(mapEl);
+        } else {
+            loadLeafletThenInit();
+        }
+    }
 })();

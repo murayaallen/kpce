@@ -1585,3 +1585,28 @@ html, body {
 .visual-frame img {
     width: 100%;
 }
+
+/* --------------------------------------------------------------------------
+   NAV "MAIN WEBSITE" PILL
+   Same specificity collision the quote button on the main page had:
+   `.menu a` in styles.css is (0,1,1) and out-specifies `.btn-nav-back` at
+   (0,1,0), so the pill rendered with `padding: 0.5rem 0` and its label ran
+   past the gradient. The underline `.menu a::after` draws is also wrong on a
+   solid pill.
+   -------------------------------------------------------------------------- */
+
+.menu a.btn-nav-back {
+    padding: 0.7rem 1.5rem;
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.btn-nav-back::after {
+    display: none !important;
+}
+
+@media (min-width: 769px) and (max-width: 1150px) {
+    .menu a.btn-nav-back { padding: 0.55rem 1rem; }
+}

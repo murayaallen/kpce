@@ -215,11 +215,17 @@
     <meta property="og:title" content="VIMAR Salt | Premium Sea Salt Supplier Kenya">
     <meta property="og:description" content="Premium sea salt for retail, wholesale and export across East Africa. Fine, powder, coarse and Himalayan pink salt with buyer documentation support.">
     <meta property="og:url" content="https://murayaallen.github.io/kpce/">
-    <meta property="og:image" content="https://murayaallen.github.io/kpce/assets/story-background.jpg">
+    <meta property="og:locale" content="en_KE">
+    <meta property="og:image" content="https://murayaallen.github.io/kpce/assets/og-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="VIMAR - natural sea salt from Kenya. Fine, powder and Himalayan pink salt jars.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="VIMAR Salt | Premium Sea Salt Supplier Kenya">
     <meta name="twitter:description" content="Premium sea salt for retail, wholesale and export across East Africa.">
-    <meta name="twitter:image" content="https://murayaallen.github.io/kpce/assets/story-background.jpg">
+    <meta name="twitter:image" content="https://murayaallen.github.io/kpce/assets/og-card.jpg">
+    <meta name="twitter:image:alt" content="VIMAR - natural sea salt from Kenya. Fine, powder and Himalayan pink salt jars.">
 
     <link rel="icon" href="assets/logo/VIMAR_LOGO.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/logo/VIMAR_LOGO.png">
@@ -241,8 +247,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body class="main-page" id="top">
     
@@ -250,7 +255,10 @@
     <div class="loader" id="loader">
         <div class="loader-bg"></div>
         <div class="loader-content">
-            <div class="logo-load"><img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR Logo" decoding="async" width="600" height="600"></div>
+            <div class="logo-load"><picture>
+                <source srcset="assets/logo/VIMAR_LOGO.webp" type="image/webp">
+                <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR Logo" decoding="async" width="192" height="192">
+            </picture></div>
             <div class="load-text">Loading Premium Quality...</div>
             <div class="load-bar"><div class="load-fill"></div></div>
         </div>
@@ -274,7 +282,10 @@
     <nav class="nav" id="nav">
         <div class="nav-wrap">
             <a href="#top" class="logo" aria-label="VIMAR home">
-                <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="600" height="600">
+                <picture>
+                    <source srcset="assets/logo/VIMAR_LOGO.webp" type="image/webp">
+                    <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="192" height="192">
+                </picture>
                 <div>
                     <div class="brand">VIMAR</div>
                     <div class="sub">Kenya Popular Commodities</div>
@@ -317,7 +328,10 @@
 
         <!-- Premium Hero Background Image + Blend -->
         <div class="hero-image-container" aria-hidden="true">
-            <img src="assets/hero-bg-crystal.jpg" alt="" class="hero-image" fetchpriority="high" decoding="async" width="1800" height="1150">
+            <picture>
+                <source srcset="assets/hero-bg-crystal.webp" type="image/webp">
+                <img src="assets/hero-bg-crystal.jpg" alt="" class="hero-image" fetchpriority="high" decoding="async" width="1800" height="1150">
+            </picture>
             <div class="hero-image-overlay"></div>
         </div>
 
@@ -397,7 +411,10 @@
     <!-- About - Glassmorphism with Background Image -->
     <section id="about" class="about-section">
         <div class="about-bg" data-speed="0.5">
-            <img src="assets/story-background.jpg" alt="" class="about-img" decoding="async" width="2000" height="1352">
+            <picture>
+                <source srcset="assets/about-bg.webp" type="image/webp">
+                <img src="assets/about-bg.jpg" alt="" class="about-img" loading="lazy" decoding="async" width="1600" height="1080">
+            </picture>
         </div>
         <div class="about-overlay"></div>
         <div class="container">
@@ -454,7 +471,10 @@
             <div class="textures-grid">
                 <div class="texture-item reveal">
                     <div class="texture-visual">
-                        <img src="assets/textures/fine-texture.jpg" alt="Fine Salt Crystals" loading="lazy" decoding="async" width="1100" height="1650">
+                        <picture>
+                            <source srcset="assets/textures/fine-texture.webp" type="image/webp">
+                            <img src="assets/textures/fine-texture.jpg" alt="Fine Salt Crystals" loading="lazy" decoding="async" width="760" height="1140">
+                        </picture>
                         <div class="texture-overlay">
                             <div class="texture-name">Fine Grade</div>
                             <div class="texture-size">0.1-0.5mm</div>
@@ -471,7 +491,10 @@
                 </div>
                 <div class="texture-item reveal">
                     <div class="texture-visual">
-                        <img src="assets/textures/powder-texture.jpg" alt="Powder Salt" loading="lazy" decoding="async" width="1100" height="733">
+                        <picture>
+                            <source srcset="assets/textures/powder-texture.webp" type="image/webp">
+                            <img src="assets/textures/powder-texture.jpg" alt="Powder Salt" loading="lazy" decoding="async" width="760" height="507">
+                        </picture>
                         <div class="texture-overlay">
                             <div class="texture-name">Powder Grade</div>
                             <div class="texture-size">&lt;0.1mm</div>
@@ -488,7 +511,10 @@
                 </div>
                 <div class="texture-item reveal">
                     <div class="texture-visual">
-                        <img src="assets/textures/coarse-texture.jpg" alt="Coarse Salt" loading="lazy" decoding="async" width="1100" height="733">
+                        <picture>
+                            <source srcset="assets/textures/coarse-texture.webp" type="image/webp">
+                            <img src="assets/textures/coarse-texture.jpg" alt="Coarse Salt" loading="lazy" decoding="async" width="760" height="507">
+                        </picture>
                         <div class="texture-overlay">
                             <div class="texture-name">Coarse Grade</div>
                             <div class="texture-size">2-5mm</div>
@@ -505,7 +531,10 @@
                 </div>
                 <div class="texture-item reveal">
                     <div class="texture-visual">
-                        <img src="assets/textures/pink-texture.jpg" alt="Pink Salt Crystals" loading="lazy" decoding="async" width="1100" height="733">
+                        <picture>
+                            <source srcset="assets/textures/pink-texture.webp" type="image/webp">
+                            <img src="assets/textures/pink-texture.jpg" alt="Pink Salt Crystals" loading="lazy" decoding="async" width="760" height="507">
+                        </picture>
                         <div class="texture-overlay">
                             <div class="texture-name">Pink Crystals</div>
                             <div class="texture-size">1-3mm</div>
@@ -536,9 +565,18 @@
                 <div class="product-card reveal" data-product="fine">
                     <div class="product-slider">
                         <div class="slider-track">
-                            <div class="slider-item active"><img src="assets/products/sea-salt-fine-iodized.jpg" alt="Fine Salt" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/sea-salt-fine-500g.jpg" alt="Fine 500g" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/sea-salt-fine-1kg.jpg" alt="Fine 1kg" loading="lazy" decoding="async" width="1100" height="733"></div>
+                            <div class="slider-item active"><picture>
+                                <source srcset="assets/products/sea-salt-fine-iodized.webp" type="image/webp">
+                                <img src="assets/products/sea-salt-fine-iodized.jpg" alt="Fine Salt" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/sea-salt-fine-500g.webp" type="image/webp">
+                                <img src="assets/products/sea-salt-fine-500g.jpg" alt="Fine 500g" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/sea-salt-fine-1kg.webp" type="image/webp">
+                                <img src="assets/products/sea-salt-fine-1kg.jpg" alt="Fine 1kg" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
                         </div>
                         <div class="product-badge">Retail • Wholesale</div>
                         <div class="slider-dots"></div>
@@ -557,9 +595,18 @@
                 <div class="product-card reveal" data-product="powder">
                     <div class="product-slider">
                         <div class="slider-track">
-                            <div class="slider-item active"><img src="assets/products/sea-salt-fine-powder.jpg" alt="Powder" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/powder-500g.jpg" alt="Powder 500g" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/powder-bulk.jpg" alt="Powder Bulk" loading="lazy" decoding="async" width="1100" height="733"></div>
+                            <div class="slider-item active"><picture>
+                                <source srcset="assets/products/sea-salt-fine-powder.webp" type="image/webp">
+                                <img src="assets/products/sea-salt-fine-powder.jpg" alt="Powder" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/powder-500g.webp" type="image/webp">
+                                <img src="assets/products/powder-500g.jpg" alt="Powder 500g" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/powder-bulk.webp" type="image/webp">
+                                <img src="assets/products/powder-bulk.jpg" alt="Powder Bulk" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
                         </div>
                         <div class="product-badge">Processing</div>
                         <div class="slider-dots"></div>
@@ -578,9 +625,18 @@
                 <div class="product-card reveal" data-product="coarse">
                     <div class="product-slider">
                         <div class="slider-track">
-                            <div class="slider-item active"><img src="assets/products/sea-salt-coarse.jpg" alt="Coarse" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/coarse-1kg.jpg" alt="Coarse 1kg" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/coarse-bulk.jpg" alt="Coarse Bulk" loading="lazy" decoding="async" width="1100" height="733"></div>
+                            <div class="slider-item active"><picture>
+                                <source srcset="assets/products/sea-salt-coarse.webp" type="image/webp">
+                                <img src="assets/products/sea-salt-coarse.jpg" alt="Coarse" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/coarse-1kg.webp" type="image/webp">
+                                <img src="assets/products/coarse-1kg.jpg" alt="Coarse 1kg" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/coarse-bulk.webp" type="image/webp">
+                                <img src="assets/products/coarse-bulk.jpg" alt="Coarse Bulk" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
                         </div>
                         <div class="product-badge">Food Service</div>
                         <div class="slider-dots"></div>
@@ -599,9 +655,18 @@
                 <div class="product-card premium reveal" data-product="pink">
                     <div class="product-slider">
                         <div class="slider-track">
-                            <div class="slider-item active"><img src="assets/products/himalayan-pink-salt.jpg" alt="Pink" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/pink-500g.jpg" alt="Pink 500g" loading="lazy" decoding="async" width="1100" height="733"></div>
-                            <div class="slider-item"><img src="assets/products/pink-1kg.jpg" alt="Pink 1kg" loading="lazy" decoding="async" width="1100" height="733"></div>
+                            <div class="slider-item active"><picture>
+                                <source srcset="assets/products/himalayan-pink-salt.webp" type="image/webp">
+                                <img src="assets/products/himalayan-pink-salt.jpg" alt="Pink" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/pink-500g.webp" type="image/webp">
+                                <img src="assets/products/pink-500g.jpg" alt="Pink 500g" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
+                            <div class="slider-item"><picture>
+                                <source srcset="assets/products/pink-1kg.webp" type="image/webp">
+                                <img src="assets/products/pink-1kg.jpg" alt="Pink 1kg" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture></div>
                         </div>
                         <div class="product-badge premium-badge">Premium</div>
                         <div class="slider-dots"></div>
@@ -638,9 +703,18 @@
                             <span>Specialty Collection</span>
                         </div>
                         <div class="visual-stack">
-                            <img src="assets/pink-salt/granules-main.jpg" alt="Pink Salt Granules" class="stack-img img-1" loading="lazy" decoding="async" width="1000" height="765">
-                            <img src="assets/pink-salt/fine-main.jpg" alt="Pink Salt Fine" class="stack-img img-2" loading="lazy" decoding="async" width="1100" height="733">
-                            <img src="assets/pink-salt/animal-lick-hero.jpg" alt="Animal Lick" class="stack-img img-3" loading="lazy" decoding="async" width="1100" height="734">
+                            <picture>
+                                <source srcset="assets/pink-salt/granules-main.webp" type="image/webp">
+                                <img src="assets/pink-salt/granules-main.jpg" alt="Pink Salt Granules" class="stack-img img-1" loading="lazy" decoding="async" width="1000" height="765">
+                            </picture>
+                            <picture>
+                                <source srcset="assets/pink-salt/fine-main.webp" type="image/webp">
+                                <img src="assets/pink-salt/fine-main.jpg" alt="Pink Salt Fine" class="stack-img img-2" loading="lazy" decoding="async" width="1100" height="733">
+                            </picture>
+                            <picture>
+                                <source srcset="assets/pink-salt/animal-lick-hero.webp" type="image/webp">
+                                <img src="assets/pink-salt/animal-lick-hero.jpg" alt="Animal Lick" class="stack-img img-3" loading="lazy" decoding="async" width="1100" height="734">
+                            </picture>
                         </div>
                     </div>
                     
@@ -904,22 +978,58 @@
             <div class="certifications reveal">
                 <h3 class="cert-title">Certifications & Partners</h3>
                 <div class="cert-grid">
-                    <div class="cert-item"><img src="assets/certificates/iso-cert.png" alt="ISO Certification" loading="lazy" decoding="async" width="420" height="420"></div>
-                    <div class="cert-item"><img src="assets/certificates/food-safety.png" alt="Food Safety" loading="lazy" decoding="async" width="420" height="108"></div>
-                    <div class="cert-item"><img src="assets/certificates/export-license.png" alt="Export License" loading="lazy" decoding="async" width="185" height="185"></div>
-                    <div class="cert-item"><img src="assets/certificates/quality-badge.png" alt="Quality Badge" loading="lazy" decoding="async" width="420" height="420"></div>
+                    <div class="cert-item"><picture>
+                        <source srcset="assets/certificates/iso-cert.webp" type="image/webp">
+                        <img src="assets/certificates/iso-cert.png" alt="ISO Certification" loading="lazy" decoding="async" width="420" height="420">
+                    </picture></div>
+                    <div class="cert-item"><picture>
+                        <source srcset="assets/certificates/food-safety.webp" type="image/webp">
+                        <img src="assets/certificates/food-safety.png" alt="Food Safety" loading="lazy" decoding="async" width="420" height="108">
+                    </picture></div>
+                    <div class="cert-item"><picture>
+                        <source srcset="assets/certificates/export-license.webp" type="image/webp">
+                        <img src="assets/certificates/export-license.png" alt="Export License" loading="lazy" decoding="async" width="185" height="185">
+                    </picture></div>
+                    <div class="cert-item"><picture>
+                        <source srcset="assets/certificates/quality-badge.webp" type="image/webp">
+                        <img src="assets/certificates/quality-badge.png" alt="Quality Badge" loading="lazy" decoding="async" width="420" height="420">
+                    </picture></div>
                 </div>
                 <div class="partners-section">
                     <h4>Trusted by leading distributors across East Africa</h4>
                     <div class="partners-grid">
-                        <div class="partner-item"><img src="assets/partners/partner-1.png" alt="Distribution partner 1" loading="lazy" decoding="async" width="420" height="420"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-2.png" alt="Distribution partner 2" loading="lazy" decoding="async" width="420" height="140"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-3.png" alt="Distribution partner 3" loading="lazy" decoding="async" width="233" height="94"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-5.png" alt="Distribution partner 4" loading="lazy" decoding="async" width="225" height="225"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-6.png" alt="Distribution partner 5" loading="lazy" decoding="async" width="205" height="246"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-7.png" alt="Distribution partner 6" loading="lazy" decoding="async" width="225" height="225"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-8.png" alt="Distribution partner 7" loading="lazy" decoding="async" width="417" height="121"></div>
-                        <div class="partner-item"><img src="assets/partners/partner-9.png" alt="Distribution partner 8" loading="lazy" decoding="async" width="420" height="420"></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-1.webp" type="image/webp">
+                            <img src="assets/partners/partner-1.png" alt="Distribution partner 1" loading="lazy" decoding="async" width="320" height="320">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-2.webp" type="image/webp">
+                            <img src="assets/partners/partner-2.png" alt="Distribution partner 2" loading="lazy" decoding="async" width="320" height="107">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-3.webp" type="image/webp">
+                            <img src="assets/partners/partner-3.png" alt="Distribution partner 3" loading="lazy" decoding="async" width="233" height="94">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-5.webp" type="image/webp">
+                            <img src="assets/partners/partner-5.png" alt="Distribution partner 4" loading="lazy" decoding="async" width="225" height="225">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-6.webp" type="image/webp">
+                            <img src="assets/partners/partner-6.png" alt="Distribution partner 5" loading="lazy" decoding="async" width="205" height="246">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-7.webp" type="image/webp">
+                            <img src="assets/partners/partner-7.png" alt="Distribution partner 6" loading="lazy" decoding="async" width="225" height="225">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-8.webp" type="image/webp">
+                            <img src="assets/partners/partner-8.png" alt="Distribution partner 7" loading="lazy" decoding="async" width="320" height="93">
+                        </picture></div>
+                        <div class="partner-item"><picture>
+                            <source srcset="assets/partners/partner-9.webp" type="image/webp">
+                            <img src="assets/partners/partner-9.png" alt="Distribution partner 8" loading="lazy" decoding="async" width="320" height="320">
+                        </picture></div>
                     </div>
                 </div>
             </div>
@@ -1024,7 +1134,10 @@
             <div class="footer-main">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="600" height="600">
+                        <picture>
+                            <source srcset="assets/logo/VIMAR_LOGO.webp" type="image/webp">
+                            <img src="assets/logo/VIMAR_LOGO.png" alt="VIMAR" decoding="async" width="192" height="192">
+                        </picture>
                         <div>
                             <div class="footer-name">VIMAR</div>
                             <div class="footer-tagline">Kenya Popular Commodities</div>
@@ -1062,7 +1175,6 @@
     </footer>
 
 <!-- Scripts -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js?v=4" defer></script>
+<script src="script.js?v=6" defer></script>
 </body>
 </html>
