@@ -1799,3 +1799,10 @@ html, body {
         margin-bottom: 0.9rem;
     }
 }
+
+/* The benefits grid sits mid-section, so unlike a section it has no top
+   padding to keep it clear of the fixed nav when the browser jumps to
+   #benefits natively -- on a shared link, or before the scroll handler runs. */
+#benefits {
+    scroll-margin-top: 110px;
+}
