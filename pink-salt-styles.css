@@ -1826,3 +1826,38 @@ html, body {
         margin-bottom: 2rem;
     }
 }
+
+/* --------------------------------------------------------------------------
+   FAQ
+   Inherits the .faq-item / .faq-answer rules from styles.css; only the
+   section wrapper and the pink accent differ.
+   -------------------------------------------------------------------------- */
+
+.pink-faq-section {
+    position: relative;
+    padding: 7rem 0;
+    background: var(--cream, #FFF9FB);
+}
+
+.pink-faq-section .faq-item summary::after {
+    border-right-color: var(--pink-primary);
+    border-bottom-color: var(--pink-primary);
+}
+
+.pink-faq-section .faq-item summary:hover {
+    color: var(--pink-dark);
+}
+
+.pink-faq-section .faq-answer a {
+    color: var(--pink-dark);
+}
+
+[data-theme="dark"] .pink-faq-section .faq-answer a {
+    color: var(--pink-light);
+}
+
+@media (max-width: 640px) {
+    .pink-faq-section {
+        padding: 4.5rem 0;
+    }
+}

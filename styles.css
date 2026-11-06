@@ -3609,3 +3609,109 @@ img, svg, video, canvas {
 .skip-link:focus {
     transform: translateY(0);
 }
+
+/* --------------------------------------------------------------------------
+   19. FAQ
+   Native <details>, so the answers are in the HTML whether or not they are
+   expanded, keyboard operable without any script, and backed by the FAQPage
+   structured data that previously described content nobody could see.
+   -------------------------------------------------------------------------- */
+
+.faq-section {
+    padding: 7rem 0;
+    background: var(--bg-secondary);
+}
+
+.faq-list {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.4rem 1.75rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    /* the default triangle sits awkwardly against a flex row */
+    list-style: none;
+    min-height: 48px;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '';
+    flex: 0 0 auto;
+    width: 11px;
+    height: 11px;
+    border-right: 2.5px solid var(--teal-500);
+    border-bottom: 2.5px solid var(--teal-500);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.25s ease;
+}
+
+.faq-item[open] summary::after {
+    transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.faq-item summary:hover {
+    color: var(--blue-700);
+}
+
+.faq-answer {
+    padding: 0 1.75rem 1.5rem;
+}
+
+.faq-answer p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    overflow-wrap: break-word;
+}
+
+.faq-answer a {
+    color: var(--blue-700);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+[data-theme="dark"] .faq-answer a {
+    color: var(--teal-400);
+}
+
+@media (max-width: 640px) {
+    .faq-section {
+        padding: 4.5rem 0;
+    }
+
+    .faq-item summary {
+        padding: 1.1rem 1.25rem;
+        font-size: 0.98rem;
+        gap: 1rem;
+    }
+
+    .faq-answer {
+        padding: 0 1.25rem 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .faq-item summary::after {
+        transition: none;
+    }
+}
