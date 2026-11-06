@@ -2911,7 +2911,13 @@ button {
 
 .contact-method a,
 .footer-col a {
-    display: inline-flex;
+    /* `flex`, not `inline-flex`: these blocks list several links under one
+       label -- two phone numbers, three email addresses -- and inline-flex ran
+       them together on the same line. `fit-content` keeps the clickable box
+       hugging the text rather than stretching across the card. */
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
     align-items: center;
     min-height: 32px;
 }

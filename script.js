@@ -10,7 +10,7 @@
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
-    const CONTACT_EMAIL = 'popularcommodities@gmail.com';
+    const CONTACT_EMAIL = 'sales@kpce.co.ke';
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     

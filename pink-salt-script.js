@@ -181,12 +181,12 @@
                 msg || '-',
                 '',
                 'Sent via VIMAR Pink Salt website',
-                'popularcommodities@gmail.com'
+                'sales@kpce.co.ke'
             ];
             
             const body = encodeURIComponent(bodyLines.join('\n'));
             
-            window.location.href = `mailto:popularcommodities@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:sales@kpce.co.ke?subject=${subject}&body=${body}`;
         });
     }
     
