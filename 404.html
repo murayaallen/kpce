@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found | VIMAR Salt</title>
+    <meta name="description" content="That page is not here. Find VIMAR sea salt products, distribution and contact details instead.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0A1628">
+
+    <!-- Inline so the browser does not request /favicon.ico, which on a 404
+         page would be a second 404. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231A3A5C'/%3E%3Cpath d='M14 32h36' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
+
+    <!-- The rest of the site stores an explicit light/dark choice rather than
+         following the system setting, so match it here and apply it before
+         first paint. -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (!t) t = 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <!-- Deliberately self-contained: GitHub Pages serves this file for any
+         unmatched path, including nested ones like /kpce/a/b/c, where a
+         relative stylesheet or image reference would resolve to nothing.
+         Everything below is inline, and the mark is an SVG rather than a
+         file, so the page renders correctly however deep the bad URL was. -->
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy-900: #0A1628;
+            --blue-700: #2C6287;
+            --teal-500: #14B8A6;
+            --teal-400: #2DD4BF;
+            --gold-500: #F59E0B;
+            --ink: #0F172A;
+            --muted: #475569;
+            --surface: #FFFFFF;
+            --line: #E2E8F0;
+        }
+
+        /* Same tokens the rest of the site switches to. */
+        [data-theme="dark"] {
+            --ink: #F8FAFC;
+            --muted: #CBD5E1;
+            --surface: #0F172A;
+            --line: #334155;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background: var(--surface);
+            color: var(--ink);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+        }
+
+        .wrap { max-width: 560px; width: 100%; }
+
+        .mark {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        .code {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--blue-700), var(--teal-500));
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.9rem, 6vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            overflow-wrap: break-word;
+            text-wrap: balance;
+        }
+
+        p {
+            font-size: clamp(1rem, 2.6vw, 1.1rem);
+            line-height: 1.7;
+            color: var(--muted);
+            margin: 0 auto 2.25rem;
+            /* Measure plus `pretty` so the last line does not come out as a
+               single orphaned word. Browsers without it still get the measure. */
+            max-width: 44ch;
+            text-wrap: pretty;
+        }
+
+        .rule {
+            width: 68px;
+            height: 4px;
+            border-radius: 4px;
+            margin: 0 auto 1.75rem;
+            background: linear-gradient(90deg, var(--teal-500), var(--gold-500));
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.85rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: var(--blue-700);
+            box-shadow: 0 6px 18px rgba(44, 98, 135, 0.3);
+        }
+
+        .btn-secondary {
+            color: var(--ink);
+            border: 2px solid var(--line);
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary:hover { box-shadow: 0 10px 24px rgba(44, 98, 135, 0.38); }
+
+        .links {
+            border-top: 1px solid var(--line);
+            padding-top: 1.75rem;
+            display: flex;
+            gap: 0.5rem 1.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            min-height: 32px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .links a:hover { color: var(--teal-500); }
+
+        :focus-visible {
+            outline: 3px solid var(--teal-400);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn { transition: none; }
+            .btn:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <!-- The real mark carries the wordmark on a banner, which is illegible
+             at 64px and clips the ring, so this keeps the silhouette only. -->
+        <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="VIMAR">
+            <circle cx="32" cy="32" r="30" fill="none" stroke="#1A3A5C" stroke-width="3"/>
+            <circle cx="32" cy="32" r="23" fill="#1A3A5C"/>
+            <path d="M11 32h42" stroke="#fff" stroke-width="3"/>
+            <path d="M18 23h28M18 41h28" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+        </svg>
+
+        <span class="code">Error 404</span>
+        <h1>That page isn&rsquo;t here</h1>
+        <div class="rule"></div>
+        <p>
+            The link may be out of date, or the address mistyped.
+            Everything is still one click away &mdash; or email
+            <a href="mailto:sales@kpce.co.ke" style="color:inherit;font-weight:600">sales@kpce.co.ke</a>
+            and we will point you to it.
+        </p>
+
+        <div class="actions">
+            <a class="btn btn-primary" href="/kpce/" data-rel="">Back to the home page</a>
+            <a class="btn btn-secondary" href="/kpce/#products" data-rel="#products">See the products</a>
+        </div>
+
+        <nav class="links" aria-label="Site sections">
+            <a href="/kpce/#about" data-rel="#about">About</a>
+            <a href="/kpce/#distribution" data-rel="#distribution">Distribution</a>
+            <a href="/kpce/#quality" data-rel="#quality">Quality</a>
+            <a href="/kpce/pink-salt.html" data-rel="pink-salt.html">Himalayan Pink Salt</a>
+            <a href="/kpce/#contact" data-rel="#contact">Contact</a>
+        </nav>
+    </main>
+
+    <script>
+        // The hrefs above are written for the GitHub Pages project site, which
+        // serves this repository under /kpce/. If the site is ever served from
+        // the root of its own domain those paths would 404 in turn, so rebuild
+        // them from wherever this page is actually being served.
+        (function () {
+            try {
+                var base = location.pathname.indexOf('/kpce/') === 0 ? '/kpce/' : '/';
+                var links = document.querySelectorAll('[data-rel]');
+                for (var i = 0; i < links.length; i++) {
+                    var rel = links[i].getAttribute('data-rel');
+                    links[i].setAttribute('href', rel.charAt(0) === '#' ? base + rel : base + rel);
+                }
+            } catch (e) { /* the written-in hrefs still work */ }
+        })();
+    </script>
+</body>
+</html>
