@@ -167,8 +167,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=9">
-    <link rel="stylesheet" href="pink-salt-styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="pink-salt-styles.css?v=10">
 </head>
 <body class="pink-salt-page">
     
@@ -460,6 +460,76 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Carries the #benefits anchor the nav points at. Deliberately
+                 about the kitchen and the purchase rather than health: the
+                 nutritional claims made for pink salt do not hold up at the
+                 quantities anyone actually cooks with, and a food supplier
+                 making them invites questions it cannot answer. -->
+            <div class="edible-benefits" id="benefits">
+                <h3 class="animals-title">Why Buyers Choose It</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-card reveal-up delay-1">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18M9 3L6 9l6 12M15 3l3 6-6 12"/>
+                            </svg>
+                        </div>
+                        <h4>Unrefined Crystal</h4>
+                        <p>Mined and graded rather than chemically refined. The pink comes from trace iron oxide in the rock itself, not from anything added to it.</p>
+                    </div>
+
+                    <div class="benefit-card reveal-up delay-2">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/>
+                            </svg>
+                        </div>
+                        <h4>Seasoning You Control</h4>
+                        <p>Coarse crystals for grinders and curing, fine grind for the table and baking. The same salt, graded for the job it has to do.</p>
+                    </div>
+
+                    <div class="benefit-card reveal-up delay-3">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a7 7 0 017 7c0 4-3 6-3 9H8c0-3-3-5-3-9a7 7 0 017-7z"/><path d="M9 21h6"/>
+                            </svg>
+                        </div>
+                        <h4>Finishes on the Plate</h4>
+                        <p>The colour and crystal size read on grilled meat, vegetables and bakery, which is why kitchens reach for it at the finishing stage.</p>
+                    </div>
+
+                    <div class="benefit-card reveal-up delay-1">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                        </div>
+                        <h4>Graded Consistently</h4>
+                        <p>Crystal size and colour are held to the same grade order after order, so a repeat shipment behaves like the one before it.</p>
+                    </div>
+
+                    <div class="benefit-card reveal-up delay-2">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                            </svg>
+                        </div>
+                        <h4>Retail to Bulk</h4>
+                        <p>300g retail jars through to bulk sacks, packed for the shelf or for onward distribution, from one supplier.</p>
+                    </div>
+
+                    <div class="benefit-card reveal-up delay-3">
+                        <div class="benefit-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                            </svg>
+                        </div>
+                        <h4>Documentation on Request</h4>
+                        <p>Specification sheets and certificates of analysis for buyers who need the paperwork to clear a listing or a border.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -490,9 +560,10 @@
                 </div>
             </div>
 
-            <!-- Benefits Grid. Carries the #benefits anchor the nav points at;
-                 without it both "Benefits" links did nothing. -->
-            <div class="benefits-grid" id="benefits">
+            <!-- Benefits of the animal lick specifically. The nav's "Benefits"
+                 link points at the edible block instead; this one is reached
+                 through "Animal Lick". -->
+            <div class="benefits-grid">
                 <div class="benefit-card reveal-up delay-1">
                     <div class="benefit-icon-large">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -758,6 +829,6 @@
         </div>
     </footer>
 
-    <script src="pink-salt-script.js?v=9"></script>
+    <script src="pink-salt-script.js?v=10"></script>
 </body>
 </html>
